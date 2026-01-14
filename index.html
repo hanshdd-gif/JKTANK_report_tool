@@ -125,12 +125,22 @@
                 </div>
                 <input type="hidden" id="skin_code" value="A2"><input type="hidden" id="skin_desc" value="偏白"><input type="hidden" id="skin_hex" value="#f4d0ac">
                 <label>📸 真實度</label>
-                <select id="p_rate"><option value="99%">99%像</option><option value="90%" selected>90%像</option><option value="80%">80%像</option><option value="70%">70%像</option></select>
+                <select id="p_rate">            
+                    <option value="99%">99%像</option><option value="90%" selected>90%像</option><option value="80%">80%像</option>
+                    <option value="70%">70%像</option><option value="60%">60%像</option><option value="50%">50%像</option><option value="完全不像">完全不像</option>
+                </select>
                 <label>🗣️ 聊天/中文能力</label>
-                <textarea id="chat_skill" rows="3" placeholder="溝通程度..."></textarea>
-                <label>✨ 外貌特徵</label>
-                <textarea id="feat_type" rows="3" placeholder="小隻馬 / 氣質型..."></textarea>
-            </div>
+        <textarea id="chat_skill" rows="3" placeholder="例如：
+        中文溝通無礙 / 慢熱
+        英文溝通 / 小學中文程度
+        中學英文程度"></textarea>
+        
+        <label>✨ 外貌特徵</label>
+        <textarea id="feat_type" rows="4" placeholder="例如：
+        小隻馬 / 漂亮耐看 / 氣質型
+        豔麗型 / 清秀型 / 可愛型...etc"></textarea>
+        </div>
+
         </div>
 
         <div class="column-right">
