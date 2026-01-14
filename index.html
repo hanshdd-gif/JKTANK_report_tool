@@ -51,8 +51,25 @@
         .section-title { font-size: 17px; font-weight: bold; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .icon-lg { font-size: 24px; }
         
-        .skin-scroll-area { width: 100%; overflow-x: auto; margin: 10px 0; border: 1px solid #FFE0E9; border-radius: 12px; background: #FFF9FA; }
-        .skin-matrix { display: grid; grid-template-columns: 80px repeat(5, 1fr); gap: 8px; min-width: 400px; padding: 10px; }
+       /* 修改這部分：確保矩陣可以滑動而不撐開頁面 */
+        .skin-scroll-area { 
+            width: 100%; 
+            overflow-x: auto;        /* 允許橫向滑動 */
+            margin: 10px 0; 
+            border: 1px solid #FFE0E9; 
+            border-radius: 12px; 
+            background: #FFF9FA;
+            -webkit-overflow-scrolling: touch; /* 新增：讓手機滑動感更滑順 */
+        }
+
+        .skin-matrix { 
+            display: grid; 
+            grid-template-columns: 80px repeat(5, 1fr); 
+            gap: 8px; 
+            min-width: 400px;        /* 保留寬度以維持矩陣形狀 */
+            padding: 10px;
+            box-sizing: border-box;  /* 新增：防止 Padding 影響計算 */
+        }
         .skin-label-h { font-size: 10px; color: #BBB; text-align: center; font-weight: bold; }
         .skin-row-name { font-size: 11px; color: #888; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-weight: bold; }
         .skin-btn { aspect-ratio: 1/1; border-radius: 10px; border: 2px solid transparent; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: rgba(0,0,0,0.2); transition: 0.2s; }
