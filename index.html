@@ -60,19 +60,27 @@
         .section-title { font-size: 17px; font-weight: bold; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
         /* 膚色滾動區修正 */
+        /* 修改此處：確保滾動區域具備強制滾動權限與流暢度 */
         .skin-scroll-area { 
             width: 100%; 
             overflow-x: auto !important; /* 強制開啟橫向滾動 */
             margin: 10px 0; 
-            border: 1px solid #FFE0E9; border-radius: 12px; background: #FFF9FA;
-            -webkit-overflow-scrolling: touch; /* iOS 滑動順暢 */
-            display: block; /* 確保不是 flex */
+            border: 1px solid #FFE0E9; 
+            border-radius: 12px; 
+            background: #FFF9FA;
+            /* 關鍵：讓 iOS 與 Android 的滑動更順暢 */
+            -webkit-overflow-scrolling: touch; 
+            display: block; 
         }
-
+        
+        /* 修改此處：確保矩陣本身有固定最小寬度來觸發滾動 */
         .skin-matrix { 
-            display: grid; grid-template-columns: 80px repeat(5, 1fr); 
-            gap: 8px; min-width: 420px; /* 稍微拉大確保手機版一定能滑動 */
-            padding: 15px; box-sizing: border-box;
+            display: grid; 
+            grid-template-columns: 80px repeat(5, 1fr); 
+            gap: 8px; 
+            min-width: 420px; /* 確保寬度大於一般手機螢幕(約375-414px)以觸發滾動 */
+            padding: 15px;
+            box-sizing: border-box;
         }
 
         .skin-btn { aspect-ratio: 1/1; border-radius: 10px; border: 2px solid transparent; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: 0.2s; color: rgba(0,0,0,0.3); }
