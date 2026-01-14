@@ -84,7 +84,7 @@
             <div>
                 <label>📍 地點</label>
                 <select id="loc_sel" onchange="toggleLocCustom()">
-                    <option value="大台北">大台北</option><option value="中山">中山</option><option value="西門">西門</option>
+                    <option value="大台北">大台北</option><option value="中山" selected>中山</option><option value="西門">西門</option>
                     <option value="板橋">板橋</option><option value="三重">三重</option><option value="樹林">樹林</option>
                     <option value="桃園">桃園</option><option value="中壢">中壢</option><option value="新竹">新竹</option>
                     <option value="台中">台中</option><option value="other">其他</option>
@@ -129,19 +129,24 @@
         <div class="flex-row">
             <div><label>📸 真實度</label>
                 <select id="p_rate">
-                    <option value="99%">99%像</option><option value="90%" selected>90%像</option><option value="80%">80%像</option>
-                    <option value="70%">70%像</option><option value="60%">60%像</option><option value="50%">50%像</option>
+                     <option value="99%">99%像</option><option value="90%" selected>90%像</option><option value="80%">80%像</option>
+                    <option value="70%">70%像</option><option value="60%">60%像</option><option value="50%">50%像</option><option value="完全不像">完全不像</option>
                 </select>
             </div>
             <div><label>🚬 抽煙</label>
-                <select id="is_smoke"><option value="無" selected>無</option><option value="有">有</option></select>
+                <select id="is_smoke"><option value="無" selected>無</option><option value="有">有</option></select><option value="不確定">不確定</option>
             </div>
         </div>
+        <label>🗣️ 聊天/中文能力</label>
+        <textarea id="chat_skill" rows="3" placeholder="例如：
+        中文溝通無礙 / 慢熱
+        英文溝通 / 小學中文程度
+        中學英文程度"></textarea>
         
-        <label>🗣️ 聊天/語文能力</label>
-        <textarea id="chat_skill" rows="2" placeholder="中文程度/溝通情況..."></textarea>
         <label>✨ 外貌特徵</label>
-        <textarea id="feat_type" rows="2" placeholder="小隻馬/氣質型/清秀..."></textarea>
+        <textarea id="feat_type" rows="4" placeholder="例如：
+        小隻馬 / 漂亮耐看 / 氣質型
+        豔麗型 / 清秀型 / 可愛型...etc"></textarea>
     </div>
 
     <div class="section">
@@ -162,22 +167,46 @@
             <label class="checkbox-item"><input type="checkbox" value="幸福滿足"> 幸福滿足</label>
         </div>
         <div class="flex-row" style="margin-top:10px;">
-            <div><label>🍓 罩杯</label><select id="cup"><option value="A">A</option><option value="B">B</option><option value="C" selected>C</option><option value="D">D</option><option value="E">E</option></select></div>
+            <div><label>🍓 罩杯</label><select id="cup">                   
+                    <option value="A">A</option><option value="B">B</option><option value="C" selected>C</option>
+                    <option value="D">D</option><option value="E">E</option><option value="F">F</option>
+                    <option value="G">G</option><option value="H">H</option><option value=">H">>H</option>
+            </select></div>
             <div><label>🥛 真假奶</label><select id="is_real"><option value="真奶" selected>真奶</option><option value="假奶">假奶</option></select></div>
+            <div><label>🍮 奶軟度</label><select id="is_soft"><option value="軟" selected>軟</option><option value="不軟">不軟</option></select></div>
+        </div>
         </div>
         <div class="flex-row">
-            <div><label>⏳ 身材</label><select id="body"><option value="纖瘦">纖瘦</option><option value="勻稱" selected>勻稱</option><option value="微肉">微肉</option></select></div>
-            <div><label>🥯 小腹</label><select id="belly"><option value="很平坦" selected>很平坦</option><option value="微凸">微凸</option></select></div>
+                <div><label>⏳ 身材</label>
+                <select id="body">
+                    <option value="纖瘦S腰身">纖瘦S腰身</option><option value="勻稱" selected>勻稱</option><option value="微肉">微肉</option><option value="胖">胖</option>
+                </select>
+            </div>
+            <div><label>🥯 小腹</label>
+                <select id="belly">
+                    <option value="很平坦" selected>很平坦</option><option value="微凸不礙事">微凸不礙事</option>
+                    <option value="有點凸">有點凸</option><option value="有疤">有疤</option><option value="妊娠紋">妊娠紋</option>
+                </select>
+            </div>
+            <div><label>🌸 毛量</label>
+                <select id="hair"><option value="無毛" selected>無毛</option><option value="少毛">少毛</option><option value="正常">正常</option></select>
+            </div>
         </div>
     </div>
 
     <div class="section">
         <div class="section-title"><span class="icon-lg">⚙️</span> 服務明細</div>
         <div class="service-grid">
-            <div class="service-item"><div class="service-item-label">👩‍❤️‍👨 女友感</div><select id="v_gf"><option value="十足">十足</option><option value="足" selected>足</option><option value="普通">普通</option></select></div>
-            <div class="service-item"><div class="service-item-label">🚿 殘廢澡</div><select id="v_bt"><option value="有" selected>有</option><option value="無">無</option></select></div>
-            <div class="service-item"><div class="service-item-label">💋 親親</div><select id="v_ks"><option value="可舌吻" selected>可舌吻</option><option value="無">無</option></select></div>
-            <div class="service-item"><div class="service-item-label">🍭 舔棒蛋</div><select id="v_bj"><option value="都有" selected>都有</option><option value="無">無</option></select></div>
+            <div class="service-item"><div class="service-item-label">👩‍❤️‍👨 女友感</div><select id="v_gf"><option value="十足">十足</option><option value="足" selected>足</option><option value="普通">普通</option><option value="不足">不足</option><option value="無感">無感</option></select></div>
+            <div class="service-item"><div class="service-item-label">🚿 殘廢澡</div><select id="v_bt"><option value="有" selected>有</option><option value="無">無</option><option value="無（自行解決）">無（自行解決）</option></select></div>
+            <div class="service-item"><div class="service-item-label">💋 親親</div><select id="v_ks"><option value="小親">小親</option><option value="可舌吻" selected>可舌吻</option><option value="lg隨時有">lg隨時有</option><option value="無">無</option></select></div>
+            <div class="service-item"><div class="service-item-label">🍭 舔棒蛋</div><select id="v_bj"><option value="舔棒">舔棒</option><option value="舔蛋">舔蛋</option><option value="都有" selected>都有</option><option value="無">無</option></select></div>
+            <div class="service-item"><div class="service-item-label">🔞 挑逗前戲</div><select id="v_pre"><option value="有" selected>有</option><option value="無">無</option><option value="沒要求">沒要求</option></select></div>
+            <div class="service-item"><div class="service-item-label">👅 舔鮑</div><select id="v_ps"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
+            <div class="service-item"><div class="service-item-label">♋ 69</div><select id="v_69"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
+            <div class="service-item"><div class="service-item-label">💦 口爆</div><select id="v_cum"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
+            <div class="service-item"><div class="service-item-label">⏱️ 時間</div><select id="v_tm"><option value="充足" selected>充足</option><option value="剛好">剛好</option><option value="不足">不足</option><option value="偷時">偷時</option></select></div>
+            <div class="service-item"><div class="service-item-label">💆 按摩</div><select id="v_msg"><option value="有">有</option><option value="無" selected>無</option></select></div>
         </div>
     </div>
 
@@ -186,7 +215,7 @@
         <textarea id="pros" rows="4" placeholder="分享過程細節..."></textarea>
         <label>🚀 回沖推薦</label>
         <select id="re_visit">
-            <option value="絕對">絕對</option><option value="推薦" selected>推薦</option><option value="普通">普通</option>
+            <option value="絕對">絕對</option><option value="推薦" selected>推薦</option><option value="普通">普通</option><option value="不推薦">不推薦</option><option value="不回沖">不回沖</option>
         </select>
     </div>
 
