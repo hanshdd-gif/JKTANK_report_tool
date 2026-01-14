@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>實際體驗報告生成器 V1</title>
+    <title>實際體驗報告生成器 V1.0</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FF7E9F">
@@ -28,7 +28,6 @@
         .section { background: var(--card-bg); margin: 10px 15px; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
         .section-title { font-size: 17px; font-weight: bold; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         
-        /* 膚色矩陣 CSS 固定 */
         .skin-scroll-area { width: 100%; overflow-x: auto; margin: 10px 0; border: 1px solid #FFE0E9; border-radius: 12px; background: #FFF9FA; }
         .skin-matrix { display: grid; grid-template-columns: 80px repeat(5, 1fr); gap: 8px; min-width: 420px; padding: 10px; }
         .skin-label-h { font-size: 10px; color: #BBB; text-align: center; font-weight: bold; }
@@ -56,7 +55,7 @@
 <body>
 
 <div class="phone-container">
-    <div class="header">🍓 評測報告生成器 V1 🍓</div>
+    <div class="header">🍓 評測報告生成器 V1.0 🍓</div>
 
     <div class="desktop-grid">
         <div class="section">
@@ -64,17 +63,24 @@
             <label>選擇店家</label>
             <select id="shop_sel" onchange="updateShopUrl()">
                 <option value="">選擇店家...</option>
-                <option value="聯賣">聯賣</option><option value="茶香">茶香</option><option value="檸檬草">檸檬草</option>
-                <option value="蘿莉小姐姐">蘿莉小姐姐</option><option value="板橋妮妮娜娜">板橋妮妮娜娜</option>
-                <option value="開心果">開心果</option><option value="Coca">Coca</option><option value="花家">花家</option>
-                <option value="維多利亞">維多利亞</option><option value="松本一香">松本一香</option><option value="後宮佳麗">後宮佳麗</option>
+                <option value="聯賣">聯賣</option>
+                <option value="茶香">茶香</option>
+                <option value="檸檬草">檸檬草</option>
+                <option value="蘿莉小姐姐">蘿莉小姐姐</option>
+                <option value="板橋妮妮娜娜">板橋妮妮娜娜</option>
+                <option value="開心果">開心果</option>
+                <option value="Coca">Coca</option>
+                <option value="花家">花家</option>
+                <option value="維多利亞">維多利亞</option>
+                <option value="松本一香">松本一香</option>
+                <option value="後宮佳麗">後宮佳麗</option>
                 <option value="custom">-- 自定義店家 --</option>
             </select>
             <input type="text" id="shop_custom" placeholder="請手動輸入店家名稱" style="display:none; margin-top:10px;">
             <textarea id="shop_url" rows="2" style="margin-top:10px;" placeholder="網址自動帶出..."></textarea>
             <div class="flex-row">
                 <div><label>🏠 環境打分</label><input type="number" id="s_env" step="0.1" value="9.0"></div>
-                <div><label>📝 環境備註</label><input type="text" id="env_note" value="浴室太小"></div>
+                <div><label>📝 環境備註</label><input type="text" id="env_note" value="無"></div>
             </div>
         </div>
 
@@ -85,114 +91,4 @@
                 <div><label>📍 國籍</label>
                     <select id="nation_sel" onchange="toggleNationCustom()">
                         <option value="泰" selected>泰</option><option value="越">越</option><option value="台">台</option>
-                        <option value="other">其他</option>
-                    </select>
-                </div>
-            </div>
-            <input type="text" id="nation_custom" placeholder="請填寫國籍" style="display:none; margin-top:10px;">
-            <div class="flex-row">
-                <div><label>🎂 年紀</label><select id="age"><option value="20-25" selected>20-25</option><option value="25-30">25-30</option></select></div>
-                <div><label>🚬 抽煙</label><select id="is_smoke"><option value="無" selected>無</option><option value="有">有</option></select></div>
-            </div>
-            <label>📸 真實度</label>
-            <select id="p_rate"><option value="90%" selected>90%像</option><option value="80%">80%像</option></select>
-        </div>
-
-        <div class="section full-width">
-            <div class="section-title">☀️ 膚色選擇 (20 格完整矩陣)</div>
-            <div class="skin-scroll-area">
-                <div class="skin-matrix">
-                    <div></div><div class="skin-label-h">Light</div><div class="skin-label-h">Med-L</div><div class="skin-label-h">Med</div><div class="skin-label-h">Med-D</div><div class="skin-label-h">Dark</div>
-                    
-                    <div class="skin-row-name">Caucasian</div>
-                    <div class="skin-btn" style="background:#f5e7e4;" onclick="setSkin(this,'C1','粉白','#f5e7e4')">C1</div><div class="skin-btn" style="background:#f0d7ce;" onclick="setSkin(this,'C2','嫩粉','#f0d7ce')">C2</div><div class="skin-btn" style="background:#e4c2b1;" onclick="setSkin(this,'C3','自然','#e4c2b1')">C3</div><div class="skin-btn" style="background:#d4ae99;" onclick="setSkin(this,'C4','沙色','#d4ae99')">C4</div><div class="skin-btn" style="background:#b38b77;" onclick="setSkin(this,'C5','褐色','#b38b77')">C5</div>
-
-                    <div class="skin-row-name">Asian</div>
-                    <div class="skin-btn" style="background:#f9e4c5;" onclick="setSkin(this,'A1','白皙','#f9e4c5')">A1</div><div class="skin-btn active" style="background:#f4d0ac;" onclick="setSkin(this,'A2','偏白','#f4d0ac')">A2</div><div class="skin-btn" style="background:#e8b98d;" onclick="setSkin(this,'A3','自然','#e8b98d')">A3</div><div class="skin-btn" style="background:#d4a373;" onclick="setSkin(this,'A4','健康','#d4a373')">A4</div><div class="skin-btn" style="background:#bc8a5f;" onclick="setSkin(this,'A5','小麥','#bc8a5f')">A5</div>
-
-                    <div class="skin-row-name">Latino</div>
-                    <div class="skin-btn" style="background:#d2b48c;" onclick="setSkin(this,'L1','拿鐵','#d2b48c')">L1</div><div class="skin-btn" style="background:#c6a664;" onclick="setSkin(this,'L2','南洋','#c6a664')">L2</div><div class="skin-btn" style="background:#a67c52;" onclick="setSkin(this,'L3','古銅','#a67c52')">L3</div><div class="skin-btn" style="background:#8b5a2b;" onclick="setSkin(this,'L4','焦糖','#8b5a2b')">L4</div><div class="skin-btn" style="background:#5d4037;" onclick="setSkin(this,'L5','黝黑','#5d4037')">L5</div>
-
-                    <div class="skin-row-name">Black</div>
-                    <div class="skin-btn" style="background:#ead2c4;" onclick="setSkin(this,'B1','淺咖','#ead2c4')">B1</div><div class="skin-btn" style="background:#c59d83;" onclick="setSkin(this,'B2','中咖','#c59d83')">B2</div><div class="skin-btn" style="background:#9d725d;" onclick="setSkin(this,'B3','深咖','#9d725d')">B3</div><div class="skin-btn" style="background:#7f5a4a;" onclick="setSkin(this,'B4','黑咖','#7f5a4a')">B4</div><div class="skin-btn" style="background:#2b0f0e; color:white;" onclick="setSkin(this,'B5','極黑','#2b0f0e')">B5</div>
-                </div>
-            </div>
-            <input type="hidden" id="skin_code" value="A2"><input type="hidden" id="skin_desc" value="偏白"><input type="hidden" id="skin_hex" value="#f4d0ac">
-        </div>
-
-        <div class="section">
-            <div class="section-title">🚦 戰力評分表</div>
-            <div class="flex-row">
-                <div><label>✨ 顏值</label><input type="number" id="s_f" step="0.1" value="9.0"></div>
-                <div><label>🛠️ 按摩</label><input type="number" id="s_s" step="0.1" value="0"></div>
-                <div><label>😊 態度</label><input type="number" id="s_a" step="0.1" value="9.0"></div>
-            </div>
-            <label>🧤 包覆感 (可複選)</label>
-            <div class="checkbox-group" id="feelings">
-                <label class="checkbox-item"><input type="checkbox" value="緊密感"> 緊密感</label>
-                <label class="checkbox-item"><input type="checkbox" value="滿足"> 滿足</label>
-            </div>
-            <div class="flex-row" style="margin-top:10px;">
-                <div><label>🍓 罩杯</label><select id="cup"><option value="C" selected>C</option></select></div>
-                <div><label>🥛 真假</label><select id="is_real"><option value="真奶" selected>真奶</option></select></div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">⚙️ 服務明細</div>
-            <div class="service-grid">
-                <div class="service-item"><label>👩‍❤️‍👨 女友感</label><select id="v_gf"><option value="足" selected>足</option></select></div>
-                <div class="service-item"><label>🚿 殘廢澡</label><select id="v_bt"><option value="有" selected>有</option></select></div>
-                <div class="service-item"><label>🔞 前戲</label><select id="v_pre"><option value="有" selected>有</option></select></div>
-                <div class="service-item"><label>🍭 舔棒</label><select id="v_bj"><option value="都有" selected>都有</option></select></div>
-            </div>
-        </div>
-
-        <div class="section full-width">
-            <div class="flex-row">
-                <div style="flex: 1;"><label>🗣️ 聊天能力</label><textarea id="chat_skill" rows="3"></textarea></div>
-                <div style="flex: 1;"><label>✨ 外貌特徵</label><textarea id="feat_type" rows="3"></textarea></div>
-            </div>
-        </div>
-
-        <div class="section full-width">
-            <div class="section-title">📝 服務心得</div>
-            <textarea id="pros" rows="6"></textarea>
-            <div class="flex-row" style="margin-top:15px; align-items: center;">
-                <div style="flex:2;"><label>🚀 回沖推薦</label><select id="re_visit"><option value="推薦" selected>推薦</option><option value="絕對">絕對</option></select></div>
-                <div style="flex:3; padding-top:20px;"><button class="btn-gen" style="margin:0; width:100%;" onclick="generateReport()">🚀 產出報告</button></div>
-            </div>
-        </div>
-    </div>
-
-    <button class="btn-copy" id="copyBtn" onclick="copyToClipboard()">📋 複製全文</button>
-    <div id="finalResult"></div>
-</div>
-
-<script>
-    const shopDataMap = { "聯賣": "https://jkforum.net/p/thread-13469722-1-1.html", "茶香": "https://jkforum.net/p/thread-20199809-1-1.html" };
-    function updateShopUrl() {
-        const sel = document.getElementById('shop_sel').value;
-        document.getElementById('shop_url').value = shopDataMap[sel] || "";
-        document.getElementById('shop_custom').style.display = (sel === 'custom') ? 'block' : 'none';
-    }
-    function toggleNationCustom() { document.getElementById('nation_custom').style.display = (document.getElementById('nation_sel').value === 'other') ? "block" : "none"; }
-    function setSkin(el, code, desc, hex) { 
-        document.querySelectorAll('.skin-btn').forEach(b => b.classList.remove('active')); 
-        el.classList.add('active'); 
-        document.getElementById('skin_code').value = code; document.getElementById('skin_desc').value = desc; document.getElementById('skin_hex').value = hex;
-    }
-    function generateReport() {
-        const g = (id) => document.getElementById(id).value;
-        const feels = Array.from(document.querySelectorAll('#feelings input:checked')).map(i => i.value).join('、') || "無";
-        const finalRec = g('re_visit');
-        const txt = `👙 **【評測報告：${g('name')}】** 👙\n\n💒 店家：${g('shop_sel')}\n📌 連結：${g('shop_url')}\n☀️ 膚色：${g('skin_hex')} (${g('skin_code')})\n🧤 包覆感：${feels}\n\n🚀 回沖推薦：${finalRec}\n💬 最終評價：${finalRec}！`;
-        document.getElementById('finalResult').innerText = txt;
-        document.getElementById('finalResult').style.display = "block";
-        document.getElementById('copyBtn').style.display = "block";
-    }
-    function copyToClipboard() { navigator.clipboard.writeText(document.getElementById('finalResult').innerText).then(() => alert('已複製！')); }
-    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
-</script>
-</body>
-</html>
+                        <option value="印">印</option><option value="韓">韓</option><option value="日">日</option>
