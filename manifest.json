@@ -1,0 +1,22 @@
+{
+  "name": "實際體驗報告生成器 V15.7",
+  "short_name": "評測生成",
+  "description": "專業實戰報告生成工具，支援離線使用",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#FFF5F7",
+  "theme_color": "#FF7E9F",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3616/3616230.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3616/3616230.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
