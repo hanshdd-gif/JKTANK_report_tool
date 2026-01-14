@@ -30,7 +30,15 @@
         }
 
         /* 主容器 */
-        .phone-container { width: 100%; max-width: 900px; padding-bottom: 50px; box-sizing: border-box; }
+        .phone-container { 
+            width: 100%; 
+            max-width: 900px; /* 這裡決定了電腦版的寬度 */
+            padding-bottom: 50px; 
+            box-sizing: border-box; 
+            margin: 0 auto; /* 新增這行確保置中 */
+        }
+
+        
 
         /* Banner */
         .header { 
@@ -48,11 +56,12 @@
             margin-bottom: 10px;
         }
 
-        /* 雙欄佈局設計 */
+       /* 修改處：新增 Flex 佈局讓電腦版並排 */
         .main-layout { 
             display: flex; 
-            flex-wrap: wrap; 
-            width: 100%;
+            flex-wrap: wrap; /* 寬度不足時自動換行 */
+            width: 100%; 
+            align-items: flex-start;
         }
         .column-left, .column-right { 
             flex: 1; 
@@ -274,7 +283,7 @@
 </div>
 
 <script>
-     const shopDataMap = { 
+    const shopDataMap = { 
         "聯賣": "https://jkforum.net/p/thread-13469722-1-1.html", "茶香": "https://jkforum.net/p/thread-20199809-1-1.html",
         "檸檬草": "https://jkforum.net/p/thread-20134169-1-1.html", "蘿莉小姐姐": "https://jkforum.net/p/thread-16691202-1-1.html",
         "板橋妮妮娜娜": "https://jkforum.net/p/thread-11617295-1-1.html", "開心果": "https://jkforum.net/p/thread-20219254-1-1.html",
@@ -283,7 +292,7 @@
         "後宮佳麗": "Line ID 86sex"
     };
 
-    unction updateShopUrl() {
+    function updateShopUrl() {
         const sel = document.getElementById('shop_sel').value;
         document.getElementById('shop_url').value = shopDataMap[sel] || "";
         document.getElementById('shop_custom').style.display = (sel === 'custom') ? 'block' : 'none';
