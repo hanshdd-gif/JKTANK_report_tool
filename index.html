@@ -134,7 +134,9 @@
                 </select>
             </div>
             <div><label>🚬 抽煙</label>
-                <select id="is_smoke"><option value="無" selected>無</option><option value="有">有</option></select><option value="不確定">不確定</option>
+                <select id="is_smoke">
+                    <option value="無" selected>無</option><option value="有">有</option><option value="不確定">不確定</option>
+                </select>
             </div>
         </div>
         <label>🗣️ 聊天/中文能力</label>
@@ -167,14 +169,13 @@
             <label class="checkbox-item"><input type="checkbox" value="幸福滿足"> 幸福滿足</label>
         </div>
         <div class="flex-row" style="margin-top:10px;">
-            <div><label>🍓 罩杯</label><select id="cup">                   
+            <div><label>🍓 罩杯</label><select id="cup">                    
                     <option value="A">A</option><option value="B">B</option><option value="C" selected>C</option>
                     <option value="D">D</option><option value="E">E</option><option value="F">F</option>
                     <option value="G">G</option><option value="H">H</option><option value=">H">>H</option>
             </select></div>
             <div><label>🥛 真假奶</label><select id="is_real"><option value="真奶" selected>真奶</option><option value="假奶">假奶</option></select></div>
             <div><label>🍮 奶軟度</label><select id="is_soft"><option value="軟" selected>軟</option><option value="不軟">不軟</option></select></div>
-        </div>
         </div>
         <div class="flex-row">
                 <div><label>⏳ 身材</label>
@@ -285,6 +286,8 @@
 🥛 真假：${g('is_real')}
 🍮 軟度：${g('is_soft')}
 🥯 小腹：${g('belly')}
+🌸 毛量：${g('hair')}
+🏠 環境打分：${g('s_env')} (${g('env_note')})
 
 ———————————————
 
@@ -293,6 +296,20 @@
 • 🛠️ 按摩技巧：${g('s_s')}
 • 😊 態度：${g('s_a')}
 • 🧤 包覆感：${feels}
+
+———————————————
+
+⚙️ 服務明細清單：
+• 👩‍❤️‍👨 女友感：${g('v_gf')}
+• 🚿 殘廢澡：${g('v_bt')}
+• 💋 親親：${g('v_ks')}
+• 🍭 舔棒蛋：${g('v_bj')}
+• 🔞 前戲：${g('v_pre')}
+• 👅 舔鮑：${g('v_ps')}
+• ♋ 69：${g('v_69')}
+• 💦 口爆：${g('v_cum')}
+• ⏱️ 時間：${g('v_tm')}
+• 💆 按摩：${g('v_msg')}
 
 ———————————————
 
