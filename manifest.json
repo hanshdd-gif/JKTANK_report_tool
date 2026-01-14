@@ -1,5 +1,5 @@
 {
-  "name": "老司機評測報告生成器 V1.1",
+  "name": "老司機評測報告生成器 V1.3",
   "short_name": "評測生成",
   "description": "專業實戰報告生成工具，支援離線填寫與一鍵複製排版功能",
   "start_url": "index.html",
