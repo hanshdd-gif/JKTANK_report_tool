@@ -3,45 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>實際體驗報告生成器 V16.1</title>
-    
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#FF7E9F">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
+    <title>老司機評測報告生成器 V1.0</title>
     <style>
         :root {
             --primary: #FF7E9F; --secondary: #FFB1C1; --bg: #FFF5F7;
             --text: #5D4037; --card-bg: #FFFFFF; --accent: #FF4D79;
         }
         body { font-family: -apple-system, "Noto Sans TC", sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; display: flex; justify-content: center; }
-        .phone-container { width: 100%; max-width: 950px; background: var(--bg); min-height: 100vh; padding-bottom: 50px; }
-        .header { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 30px 15px; text-align: center; color: white; font-size: 22px; font-weight: bold; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(255, 126, 159, 0.4); margin-bottom: 10px; }
         
-        /* 響應式佈局 */
-        .desktop-grid { display: grid; grid-template-columns: 1fr; gap: 0; }
-        @media (min-width: 768px) {
-            .desktop-grid { grid-template-columns: 1fr 1fr; padding: 10px; gap: 10px; }
+        /* 響應式容器：手機 100%，電腦最高 1080px */
+        .phone-container { width: 100%; max-width: 1080px; background: var(--bg); min-height: 100vh; padding-bottom: 50px; }
+        
+        .header { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 30px 15px; text-align: center; color: white; font-size: 22px; font-weight: bold; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(255, 126, 159, 0.4); margin-bottom: 10px; }
+
+        /* 響應式佈局：大螢幕使用雙欄 */
+        .main-layout { display: grid; grid-template-columns: 1fr; gap: 0; }
+
+        @media (min-width: 1024px) {
+            .main-layout { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 10px; }
             .full-width { grid-column: span 2; }
         }
 
-        .section { background: var(--card-bg); margin: 10px 15px; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+        .section { background: var(--card-bg); margin: 15px; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); height: fit-content; }
         .section-title { font-size: 17px; font-weight: bold; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .icon-lg { font-size: 24px; }
         
-        /* 膚色矩陣 */
         .skin-scroll-area { width: 100%; overflow-x: auto; margin: 10px 0; border: 1px solid #FFE0E9; border-radius: 12px; background: #FFF9FA; }
-        .skin-matrix { display: grid; grid-template-columns: 80px repeat(5, 1fr); gap: 8px; min-width: 420px; padding: 10px; }
+        .skin-matrix { display: grid; grid-template-columns: 80px repeat(5, 1fr); gap: 8px; min-width: 400px; padding: 10px; }
         .skin-label-h { font-size: 10px; color: #BBB; text-align: center; font-weight: bold; }
         .skin-row-name { font-size: 11px; color: #888; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-weight: bold; }
         .skin-btn { aspect-ratio: 1/1; border-radius: 10px; border: 2px solid transparent; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: rgba(0,0,0,0.2); transition: 0.2s; }
         .skin-btn.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: #000; }
         
         label { display: block; font-size: 13px; font-weight: bold; margin: 15px 0 6px 2px; color: #777; }
-        input, select, textarea { width: 100%; padding: 14px; border: 1.5px solid #F3F3F3; border-radius: 14px; font-size: 16px; background: #FAFAFA; box-sizing: border-box; outline: none; transition: 0.3s; color: var(--text); }
-        textarea { resize: none; font-family: inherit; }
+        input, select, textarea { width: 100%; padding: 14px; border: 1.5px solid #F3F3F3; border-radius: 14px; font-size: 16px; background: #FAFAFA; box-sizing: border-box; outline: none; transition: 0.3s; color: var(--text); font-family: inherit; }
+        textarea { resize: none; }
         
         .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-        .checkbox-item { display: flex; align-items: center; gap: 4px; font-size: 13.5px; color: #555; background: #FFF9FA; padding: 8px 6px; border-radius: 8px; border: 1px solid #FFEDF1; }
+        .checkbox-item { display: flex; align-items: center; gap: 4px; font-size: 13.5px; color: #555; background: #FFF9FA; padding: 8px 6px; border-radius: 8px; border: 1px solid #FFEDF1; white-space: nowrap; }
+        .checkbox-item input { width: 16px; height: 16px; margin: 0; flex-shrink: 0; }
+
         .flex-row { display: flex; gap: 12px; }
         .flex-row > div { flex: 1; }
         .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -51,169 +52,24 @@
         .btn-gen { background: linear-gradient(to right, #FF7E9F, #FF4D79); color: white; border: none; border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 20px 15px; box-shadow: 0 8px 20px rgba(255, 77, 121, 0.4); }
         .btn-copy { background: white; color: #4CAF50; border: 2px solid #4CAF50; border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 0 15px 20px; display: none; }
         #finalResult { background: white; margin: 25px 15px; padding: 20px; border-radius: 20px; border: 2.5px dashed var(--secondary); font-size: 15px; white-space: pre-wrap; display: none; line-height: 1.7; }
+
+        /* 電腦版調整按鈕樣式 */
+        @media (min-width: 1024px) {
+            .btn-gen, .btn-copy { width: calc(100% - 40px); margin: 20px auto; display: block; max-width: 400px; }
+        }
     </style>
 </head>
 <body>
 
 <div class="phone-container">
-    <div class="header">🍓 評測報告生成器 V16.1 🍓</div>
+    <div class="header">🍓 老司機評測報告生成器 V1.0 🍓</div>
 
-    <div class="desktop-grid">
-        <div class="section">
-            <div class="section-title">💒 店家資訊與環境</div>
-            <label>選擇店家</label>
-            <select id="shop_sel" onchange="updateShopUrl()">
-                <option value="">選擇店家...</option>
-                <option value="聯賣">聯賣</option><option value="茶香">茶香</option><option value="檸檬草">檸檬草</option>
-                <option value="蘿莉小姐姐">蘿莉小姐姐</option><option value="板橋妮妮娜娜">板橋妮妮娜娜</option>
-                <option value="開心果">開心果</option><option value="Coca">Coca</option><option value="花家">花家</option>
-                <option value="維多利亞">維多利亞</option><option value="松本一香">松本一香</option><option value="後宮佳麗">後宮佳麗</option>
-                <option value="custom">-- 自定義店家 --</option>
-            </select>
-            <input type="text" id="shop_custom" placeholder="請手動輸入店家名稱" style="display:none; margin-top:10px;">
-            <textarea id="shop_url" rows="2" style="margin-top:10px;" placeholder="網址自動帶出..."></textarea>
-            
-            <div class="flex-row">
-                <div><label>🏠 環境打分</label><input type="number" id="s_env" step="0.1" value="9.0"></div>
-                <div><label>📝 環境備註</label><input type="text" id="env_note" value="無"></div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">💃 基本資料與特徵</div>
-            <div class="flex-row">
-                <div><label>👙 妹名</label><input type="text" id="name" value="小美"></div>
-                <div><label>📍 國籍</label>
-                    <select id="nation_sel" onchange="toggleNationCustom()">
-                        <option value="泰" selected>泰</option><option value="越">越</option><option value="台">台</option>
-                        <option value="other">其他</option>
-                    </select>
-                </div>
-            </div>
-            <input type="text" id="nation_custom" placeholder="請填寫國籍" style="display:none; margin-top:10px;">
-            <div class="flex-row">
-                <div><label>🎂 年紀</label>
-                    <select id="age">
-                        <option value="18-20">18-20</option><option value="20-25" selected>20-25</option><option value="25-30">25-30</option>
-                    </select>
-                </div>
-                <div><label>🚬 抽煙</label>
-                    <select id="is_smoke"><option value="無" selected>無</option><option value="有">有</option></select>
-                </div>
-            </div>
-        </div>
-
-        <div class="section full-width">
-            <div class="section-title">☀️ 膚色選擇</div>
-            <div class="skin-scroll-area">
-                <div class="skin-matrix">
-                    <div></div><div class="skin-label-h">Light</div><div class="skin-label-h">Med-L</div><div class="skin-label-h">Med</div><div class="skin-label-h">Med-D</div><div class="skin-label-h">Dark</div>
-                    <div class="skin-row-name">Asian</div>
-                    <div class="skin-btn" style="background:#f9e4c5;" onclick="setSkin(this,'A1','白皙','#f9e4c5')">A1</div><div class="skin-btn active" style="background:#f4d0ac;" onclick="setSkin(this,'A2','偏白','#f4d0ac')">A2</div><div class="skin-btn" style="background:#e8b98d;" onclick="setSkin(this,'A3','自然','#e8b98d')">A3</div><div class="skin-btn" style="background:#d4a373;" onclick="setSkin(this,'A4','健康','#d4a373')">A4</div><div class="skin-btn" style="background:#bc8a5f;" onclick="setSkin(this,'A5','小麥','#bc8a5f')">A5</div>
-                </div>
-            </div>
-            <input type="hidden" id="skin_code" value="A2"><input type="hidden" id="skin_desc" value="偏白"><input type="hidden" id="skin_hex" value="#f4d0ac">
-        </div>
-
-        <div class="section">
-            <div class="section-title">🚦 戰力評分</div>
-            <div class="flex-row">
-                <div><label>✨ 顏值</label><input type="number" id="s_f" step="0.1" value="9.0"></div>
-                <div><label>🛠️ 按摩</label><input type="number" id="s_s" step="0.1" value="0"></div>
-                <div><label>😊 態度</label><input type="number" id="s_a" step="0.1" value="9.0"></div>
-            </div>
-            <label>🧤 包覆感</label>
-            <div class="checkbox-group" id="feelings">
-                <label class="checkbox-item"><input type="checkbox" value="緊密感"> 緊密感</label>
-                <label class="checkbox-item"><input type="checkbox" value="滿足"> 滿足</label>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">⚙️ 服務明細</div>
-            <div class="service-grid">
-                <div class="service-item"><label>👩‍❤️‍👨 女友感</label><select id="v_gf"><option value="足" selected>足</option><option value="十足">十足</option></select></div>
-                <div class="service-item"><label>🚿 殘廢澡</label><select id="v_bt"><option value="有" selected>有</option></select></div>
-                <div class="service-item"><label>🔞 前戲</label><select id="v_pre"><option value="有" selected>有</option></select></div>
-                <div class="service-item"><label>⏱️ 時間</label><select id="v_tm"><option value="充足" selected>充足</option></select></div>
-            </div>
-        </div>
-
-        <div class="section full-width">
-            <div class="flex-row">
-                <div style="flex:1;"><label>🗣️ 聊天/特徵</label><textarea id="chat_skill" rows="3"></textarea></div>
-                <div style="flex:1;"><label>✨ 外貌細節</label><textarea id="feat_type" rows="3"></textarea></div>
-            </div>
-            <label>📝 服務心得</label>
-            <textarea id="pros" rows="6"></textarea>
-            <div class="flex-row" style="margin-top:15px; align-items:center;">
-                <div style="flex:1;"><label>🚀 回沖推薦</label><select id="re_visit"><option value="推薦" selected>推薦</option><option value="絕對">絕對</option></select></div>
-                <div style="flex:1; padding-top:20px;"><button class="btn-gen" style="margin:0; width:100%;" onclick="generateReport()">🚀 產出報告</button></div>
-            </div>
-        </div>
-    </div>
-
-    <button class="btn-copy" id="copyBtn" onclick="copyToClipboard()">📋 複製全文</button>
-    <div id="finalResult"></div>
-</div>
-
-<script>
-    const shopDataMap = { 
-        "聯賣": "https://jkforum.net/p/thread-13469722-1-1.html",
-        "茶香": "https://jkforum.net/p/thread-20199809-1-1.html",
-        "檸檬草": "https://jkforum.net/p/thread-20134169-1-1.html",
-        "蘿莉小姐姐": "https://jkforum.net/p/thread-16691202-1-1.html",
-        "板橋妮妮娜娜": "https://jkforum.net/p/thread-11617295-1-1.html",
-        "開心果": "https://jkforum.net/p/thread-20219254-1-1.html",
-        "Coca": "https://jkforum.net/p/thread-18237264-1-1.html",
-        "花家": "https://jkforum.net/p/thread-15456349-1-1.html",
-        "維多利亞": "https://jkforum.net/p/thread-20145525-1-1.html",
-        "松本一香": "https://jkforum.net/p/thread-19782916-1-1.html",
-        "後宮佳麗": "Line ID 86sex"
-    };
-
-    function updateShopUrl() {
-        const sel = document.getElementById('shop_sel').value;
-        const urlBox = document.getElementById('shop_url');
-        const customBox = document.getElementById('shop_custom');
-        if(urlBox) urlBox.value = shopDataMap[sel] || "";
-        if(customBox) customBox.style.display = (sel === 'custom') ? 'block' : 'none';
-    }
-
-    function toggleNationCustom() {
-        const sel = document.getElementById('nation_sel').value;
-        const custom = document.getElementById('nation_custom');
-        if(custom) custom.style.display = (sel === 'other') ? 'block' : 'none';
-    }
-
-    function setSkin(el, code, desc, hex) { 
-        document.querySelectorAll('.skin-btn').forEach(b => b.classList.remove('active')); 
-        el.classList.add('active'); 
-        document.getElementById('skin_code').value = code;
-        document.getElementById('skin_desc').value = desc;
-        document.getElementById('skin_hex').value = hex;
-    }
-
-    function generateReport() {
-        const g = (id) => document.getElementById(id) ? document.getElementById(id).value : "N/A";
-        const shop = document.getElementById('shop_sel').value === 'custom' ? g('shop_custom') : document.getElementById('shop_sel').value;
-        const feels = Array.from(document.querySelectorAll('#feelings input:checked')).map(i => i.value).join('、') || "無";
-        
-        const txt = `👙 **【評測報告：${g('name')}】** 👙\n\n💒 店家：${shop}\n📌 連結：${g('shop_url')}\n☀️ 膚色：${g('skin_hex')} (${g('skin_code')})\n\n🚦 評分：${g('s_f')}\n🧤 包覆感：${feels}\n\n📝 心得：\n${g('pros')}\n\n🚀 推薦：${g('re_visit')}！`;
-
-        const res = document.getElementById('finalResult');
-        const btn = document.getElementById('copyBtn');
-        if(res) { res.innerText = txt; res.style.display = "block"; }
-        if(btn) btn.style.display = "block";
-        window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
-    }
-
-    function copyToClipboard() {
-        const text = document.getElementById('finalResult').innerText;
-        navigator.clipboard.writeText(text).then(() => alert('已複製到剪貼簿！'));
-    }
-
-    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
-</script>
-</body>
-</html>
+    <div class="main-layout">
+        <div class="column-left">
+            <div class="section">
+                <div class="section-title"><span class="icon-lg">💒</span> 店家資訊與環境</div>
+                <label>選擇店家</label>
+                <select id="shop_sel" onchange="updateShopUrl()">
+                    <option value="">選擇店家...</option>
+                    <option value="聯賣">聯賣</option><option value="茶香">茶香</option><option value="檸檬草">檸檬草</option>
+                    <option value="蘿莉小姐姐">蘿莉小姐姐</option><option value="板橋妮
