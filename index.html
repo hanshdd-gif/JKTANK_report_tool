@@ -1,101 +1,101 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
+head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>老司機評測報告生成器 V1.1</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF7E9F">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
     <style>
         :root {
             --primary: #FF7E9F; --secondary: #FFB1C1; --bg: #FFF5F7;
             --text: #5D4037; --card-bg: #FFFFFF; --accent: #FF4D79;
         }
-        body { font-family: -apple-system, "Noto Sans TC", sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; display: flex; justify-content: center; }
+        body { 
+            font-family: -apple-system, "Noto Sans TC", sans-serif; 
+            background-color: var(--bg); color: var(--text); 
+            margin: 0; padding: 0; display: flex; justify-content: center;
+            overflow-x: hidden; /* 防止整體頁面抖動 */
+        }
         
-        /* 容器寬度自適應：手機 100%，電腦最高 1080px */
         .phone-container { 
-                width: 100%;             /* 確保充滿螢幕 */
-                max-width: 450px; 
-                background: var(--bg); 
-                min-height: 100vh; 
-                padding-bottom: 50px; 
-                margin: 0 auto;          /* 確保在電腦瀏覽時居中 */
-                overflow-x: hidden;      /* 新增：徹底禁止水平溢出 */
-                display: flex;
-                flex-direction: column;
-        }       
-        .header { 
-                background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-                padding: 30px 15px; 
-                text-align: center; 
-                color: white; 
-                font-size: 22px; 
-                font-weight: bold; 
-                border-bottom-left-radius: 30px; 
-                border-bottom-right-radius: 30px; 
-                box-shadow: 0 4px 15px rgba(255, 126, 159, 0.4);
-                width: 100%;             /* 新增：確保寬度充滿螢幕 */
-                box-sizing: border-box;  /* 新增：防止 Padding 撐破寬度 */
-                display: block;          /* 新增：確保其為區塊元素 */
+            width: 100%; max-width: 1000px; /* 拉大電腦版寬度限制 */
+            background: var(--bg); min-height: 100vh; 
+            padding-bottom: 50px; margin: 0 auto;
+            display: flex; flex-direction: column;
         }
 
-        /* 核心響應式佈局：大螢幕時開啟雙欄網格 */
-        .main-layout { display: grid; grid-template-columns: 1fr; width: 100%; }
+        .header { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+            padding: 30px 15px; text-align: center; color: white; 
+            font-size: 22px; font-weight: bold; 
+            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; 
+            box-shadow: 0 4px 15px rgba(255, 126, 159, 0.4);
+            width: 100%; box-sizing: border-box;
+        }
+
+        /* 佈局修正：手機單欄，電腦雙欄 */
+        .main-layout { 
+            display: grid; grid-template-columns: 1fr; width: 100%; 
+            box-sizing: border-box;
+        }
 
         @media (min-width: 1024px) {
-            .main-layout { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 10px; box-sizing: border-box; }
-            .full-width { grid-column: span 2; }
-            .section { margin: 10px !important; } /* 電腦版微調邊距 */
+            .main-layout { 
+                grid-template-columns: 1fr 1fr; /* 電腦版 1:1 分配 */
+                gap: 20px; padding: 10px 25px; 
+            }
+            .section { margin: 10px 0 !important; }
         }
 
-        .section { background: var(--card-bg); margin: 20px 15px; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); height: fit-content; }
+        .section { 
+            background: var(--card-bg); margin: 20px 15px; padding: 20px; 
+            border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); 
+            height: fit-content; box-sizing: border-box;
+        }
+
         .section-title { font-size: 17px; font-weight: bold; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .icon-lg { font-size: 24px; }
         
-       /* 修改這部分：確保矩陣可以滑動而不撐開頁面 */
+        /* 膚色滾動區修正 */
         .skin-scroll-area { 
             width: 100%; 
-            overflow-x: auto;        /* 允許橫向滑動 */
+            overflow-x: auto !important; /* 強制開啟橫向滾動 */
             margin: 10px 0; 
-            border: 1px solid #FFE0E9; 
-            border-radius: 12px; 
-            background: #FFF9FA;
-            -webkit-overflow-scrolling: touch; /* 新增：讓手機滑動感更滑順 */
+            border: 1px solid #FFE0E9; border-radius: 12px; background: #FFF9FA;
+            -webkit-overflow-scrolling: touch; /* iOS 滑動順暢 */
+            display: block; /* 確保不是 flex */
         }
 
         .skin-matrix { 
-            display: grid; 
-            grid-template-columns: 80px repeat(5, 1fr); 
-            gap: 8px; 
-            min-width: 400px;        /* 保留寬度以維持矩陣形狀 */
-            padding: 10px;
-            box-sizing: border-box;  /* 新增：防止 Padding 影響計算 */
+            display: grid; grid-template-columns: 80px repeat(5, 1fr); 
+            gap: 8px; min-width: 420px; /* 稍微拉大確保手機版一定能滑動 */
+            padding: 15px; box-sizing: border-box;
         }
+
+        .skin-btn { aspect-ratio: 1/1; border-radius: 10px; border: 2px solid transparent; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: 0.2s; color: rgba(0,0,0,0.3); }
+        .skin-btn.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: #000; }
         .skin-label-h { font-size: 10px; color: #BBB; text-align: center; font-weight: bold; }
         .skin-row-name { font-size: 11px; color: #888; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-weight: bold; }
-        .skin-btn { aspect-ratio: 1/1; border-radius: 10px; border: 2px solid transparent; cursor: pointer; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: rgba(0,0,0,0.2); transition: 0.2s; }
-        .skin-btn.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: #000; }
-        
-        label { display: block; font-size: 13px; font-weight: bold; margin: 15px 0 6px 2px; color: #777; }
-        input, select, textarea { width: 100%; padding: 14px; border: 1.5px solid #F3F3F3; border-radius: 14px; font-size: 16px; background: #FAFAFA; box-sizing: border-box; outline: none; transition: 0.3s; color: var(--text); font-family: inherit; }
-        textarea { resize: none; }
-        
-        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-        .checkbox-item { display: flex; align-items: center; gap: 4px; font-size: 13.5px; color: #555; background: #FFF9FA; padding: 8px 6px; border-radius: 8px; border: 1px solid #FFEDF1; white-space: nowrap; }
-        .checkbox-item input { width: 16px; height: 16px; margin: 0; flex-shrink: 0; }
 
-        .flex-row { display: flex; gap: 12px; }
-        .flex-row > div { flex: 1; }
+        label { display: block; font-size: 13px; font-weight: bold; margin: 15px 0 6px 2px; color: #777; }
+        input, select, textarea { width: 100%; padding: 14px; border: 1.5px solid #F3F3F3; border-radius: 14px; font-size: 16px; background: #FAFAFA; box-sizing: border-box; transition: 0.3s; color: var(--text); }
+        
+        .flex-row { display: flex; gap: 12px; margin-bottom: 10px; }
+        .flex-row > div { flex: 1; min-width: 0; }
+
+        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: #555; background: #FFF9FA; padding: 8px 6px; border-radius: 8px; border: 1px solid #FFEDF1; }
+
         .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .service-item { background: #FFF9FA; padding: 12px; border-radius: 15px; border: 1px solid #FFEDF1; }
         .service-item-label { font-size: 13px; font-weight: bold; color: #555; margin-bottom: 5px; }
         
-        .btn-gen { background: linear-gradient(to right, #FF7E9F, #FF4D79); color: white; border: none; border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 20px 15px; box-shadow: 0 8px 20px rgba(255, 77, 121, 0.4); display: block; }
+        .btn-gen { background: linear-gradient(to right, #FF7E9F, #FF4D79); color: white; border: none; border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 20px 15px; box-shadow: 0 8px 20px rgba(255, 77, 121, 0.4); }
         .btn-copy { background: white; color: #4CAF50; border: 2px solid #4CAF50; border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 0 15px 20px; display: none; }
         #finalResult { background: white; margin: 25px 15px; padding: 20px; border-radius: 20px; border: 2.5px dashed var(--secondary); font-size: 15px; white-space: pre-wrap; display: none; line-height: 1.7; }
-
-        @media (min-width: 1024px) {
-            .btn-gen, .btn-copy { max-width: 400px; margin-left: auto; margin-right: auto; }
-        }
     </style>
 </head>
 <body>
