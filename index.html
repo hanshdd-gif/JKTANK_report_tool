@@ -12,9 +12,31 @@
         body { font-family: -apple-system, "Noto Sans TC", sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; display: flex; justify-content: center; }
         
         /* 容器寬度自適應：手機 100%，電腦最高 1080px */
-        .phone-container { width: 100%; max-width: 1080px; background: var(--bg); min-height: 100vh; padding-bottom: 50px; }
-        
-        .header { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 30px 15px; text-align: center; color: white; font-size: 22px; font-weight: bold; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(255, 126, 159, 0.4); margin-bottom: 10px; }
+        .phone-container { 
+                width: 100%;             /* 確保充滿螢幕 */
+                max-width: 450px; 
+                background: var(--bg); 
+                min-height: 100vh; 
+                padding-bottom: 50px; 
+                margin: 0 auto;          /* 確保在電腦瀏覽時居中 */
+                overflow-x: hidden;      /* 新增：徹底禁止水平溢出 */
+                display: flex;
+                flex-direction: column;
+        }       
+        .header { 
+                background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+                padding: 30px 15px; 
+                text-align: center; 
+                color: white; 
+                font-size: 22px; 
+                font-weight: bold; 
+                border-bottom-left-radius: 30px; 
+                border-bottom-right-radius: 30px; 
+                box-shadow: 0 4px 15px rgba(255, 126, 159, 0.4);
+                width: 100%;             /* 新增：確保寬度充滿螢幕 */
+                box-sizing: border-box;  /* 新增：防止 Padding 撐破寬度 */
+                display: block;          /* 新增：確保其為區塊元素 */
+        }
 
         /* 核心響應式佈局：大螢幕時開啟雙欄網格 */
         .main-layout { display: grid; grid-template-columns: 1fr; width: 100%; }
