@@ -133,9 +133,20 @@
             </div>
 
             <div class="section">
-                <div class="section-title"><span class="icon-lg">💃</span> 基本資料與特徵</div>
-                <div class="flex-row">
-                    <div><label>👙 妹名</label><input type="text" id="name" value="小美"></div>
+        <div class="section-title">💃 基本資料</div>
+        <div class="flex-row">
+            <div><label>👙 妹名</label><input type="text" id="name" value="小美"></div>
+            <div>
+                <label>📍 地點</label>
+                <select id="loc_sel" onchange="toggleLocCustom()">
+                    <option value="大台北">大台北</option><option value="中山">中山</option><option value="西門">西門</option>
+                    <option value="板橋">板橋</option><option value="三重">三重</option><option value="樹林">樹林</option>
+                    <option value="桃園">桃園</option><option value="中壢">中壢</option><option value="新竹">新竹</option>
+                    <option value="台中">台中</option><option value="other">其他</option>
+                </select>
+            </div>
+        </div>
+        <input type="text" id="loc_custom" placeholder="請手動輸入地點" style="display:none; margin-top:10px;">
                     <div><label>📍 國籍</label>
                         <select id="nation_sel" onchange="toggleNationCustom()">
                             <option value="泰" selected>泰</option><option value="越">越</option><option value="台">台</option>
@@ -299,24 +310,34 @@
         document.getElementById('skin_code').value = code; document.getElementById('skin_desc').value = desc; document.getElementById('skin_hex').value = hex;
     }
 
-    function generateReport() {
-        const g = (id) => { const el = document.getElementById(id); return el ? el.value : "N/A"; };
+<script>
+   function toggleLocCustom() {
+        document.getElementById('loc_custom').style.display = (document.getElementById('loc_sel').value === 'other') ? 'block' : 'none';
+    }
+
+   function generateReport() {
+        const g = (id) => document.getElementById(id) ? document.getElementById(id).value : "";
+        const name = g('name');
+        const location = g('loc_sel') === 'other' ? g('loc_custom') : g('loc_sel');
+        };
         const shop = document.getElementById('shop_sel').value === 'custom' ? g('shop_custom') : document.getElementById('shop_sel').value;
         const feels = Array.from(document.querySelectorAll('#feelings input:checked')).map(i => i.value).join('、') || "無特別感受";
         const finalRec = g('re_visit');
+        const name = g('name');
 
-        const txt = `👙 **【真實體驗紀錄：${g('name')}】** 👙
+        const txt = `👙 **【評測報告：${name}】** 👙
 
 💒 店家：${shop}
 📌 連結：${g('shop_url')}
-
+🏠 地點：${location}
+👤 姓名＝${name}
 📍 國籍：${document.getElementById('nation_sel').value === 'other' ? g('nation_custom') : document.getElementById('nation_sel').value}
 🎂 年紀：${g('age')}
 🚬 抽煙：${g('is_smoke')}
 📸 真實度：${g('p_rate')}
 ☀️ 膚色：色號 ${g('skin_hex')} (編號 ${g('skin_code')} ${g('skin_desc')})
 ✨ 外貌特徵：${g('feat_type')}
-🗣️ 聊天/語文/程度：${g('chat_skill')}
+🗣️ 聊天/語文：${g('chat_skill')}
 
 ⏳ 身材：${g('body')}
 🍓 罩杯：${g('cup')}杯
@@ -356,15 +377,46 @@ ${g('pros')}
 🚀 回沖推薦：${finalRec}
 💬 最終評價：${finalRec}！`;
 
-        const res = document.getElementById('finalResult');
-        if(res) { res.innerText = txt; res.style.display = "block"; }
+        document.getElementById('finalResult').innerText = txt;
+        document.getElementById('finalResult').style.display = "block";
         document.getElementById('copyBtn').style.display = "block";
+        document.getElementById('saveBtn').style.display = "block";
         window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+    }
+
+    // 核心修改：將內容包裝成 HTML 檔案下載，以保留內容圖示
+    function saveToFile() {
+        const text = document.getElementById('finalResult').innerText;
+        const name = document.getElementById('name').value || "未命名";
+        
+        // 建立一個簡單的 HTML 模板，確保手機開啟時編碼正確且能看到圖示
+        const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>${name} 評測報告</title>
+            <style>
+                body { font-family: sans-serif; padding: 20px; line-height: 1.6; background-color: #FFF5F7; color: #5D4037; }
+                .container { background: white; padding: 20px; border-radius: 15px; border: 2px solid #FFB1C1; white-space: pre-wrap; }
+            </style>
+        </head>
+        <body>
+            <div class="container">${text}</div>
+        </body>
+        </html>`;
+
+        const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `${name}_評測報告.html`; 
+        link.click();
+        URL.revokeObjectURL(link.href);
     }
 
     function copyToClipboard() {
         const text = document.getElementById('finalResult').innerText;
-        navigator.clipboard.writeText(text).then(() => alert('報告已複製到剪貼簿！'));
+        navigator.clipboard.writeText(text).then(() => alert('已複製到剪貼簿！'));
     }
 </script>
 </body>
