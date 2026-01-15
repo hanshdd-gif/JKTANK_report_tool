@@ -318,26 +318,21 @@
 
 function generateReport() {
     try {
-        // 第一步：定義取值函式
+        // 定義取值函式，若找不到 ID 會跳錯誤
         const g = (id) => {
             const el = document.getElementById(id);
-            if (!el) throw new Error("找不到欄位 ID: " + id); // 如果 ID 寫錯會直接報警
+            if (!el) throw new Error("找不到欄位: " + id);
             return el.value;
         };
 
-        // 第二步：檢查必填欄位 (防止因為空白導致後續計算當掉)
         const name = g('name');
-        if (!name) { alert("⚠️ 請先填寫妹名喔！"); return; }
+        if (!name || name === "小美") {
+            if(!confirm("目前妹名是預設的『小美』，確定要繼續嗎？")) return;
+        }
 
-        // 第三步：抓取地點與國籍 (處理 other 選項)
         const location = g('loc_sel') === 'other' ? g('loc_custom') : g('loc_sel');
-        const nation = g('nation_sel') === 'other' ? g('nation_custom') : g('nation_sel');
         const shop = g('shop_sel') === 'custom' ? g('shop_custom') : g('shop_sel');
-        
-        // 抓取勾選框
-        const feels = Array.from(document.querySelectorAll('#feelings input:checked'))
-                          .map(i => i.value).join('、') || "無特別感受";
-
+        const feels = Array.from(document.querySelectorAll('#feelings input:checked')).map(i => i.value).join('、') || "無特別感受";
         const txt = `👙 **【真實體驗紀錄：${name}】** 👙
 
 💒 店家：${shop}
