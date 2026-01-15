@@ -1,4 +1,4 @@
-const CACHE_NAME = 'report-tool-v1.66';
+const CACHE_NAME = 'report-tool-v1.7';
 const assets = [
   './',
   './index.html',
