@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>老司機評測報告生成器 V1.55</title>
+    <title>老司機評測報告生成器 V1.56</title>
     
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="./icon.png">
@@ -26,8 +26,10 @@
             margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; 
         }
 
+        /* 主容器 */
         .phone-container { width: 100%; max-width: 900px; padding-bottom: 50px; box-sizing: border-box; margin: 0 auto; }
 
+        /* Banner */
         .header { 
             background: linear-gradient(135deg, var(--primary), var(--secondary)); 
             padding: 30px 15px; text-align: center; color: white; font-size: 22px; font-weight: bold; 
@@ -42,6 +44,7 @@
         .section-title { font-size: 17px; font-weight: bold; color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .icon-lg { font-size: 24px; }
         
+        /* 膚色矩陣 */
         .skin-scroll-area { width: 100%; overflow-x: auto; margin: 10px 0; border: 1px solid #FFE0E9; border-radius: 12px; background: #FFF9FA; -webkit-overflow-scrolling: touch; }
         .skin-matrix { display: grid; grid-template-columns: 80px repeat(5, 1fr); gap: 8px; min-width: 450px; padding: 10px; box-sizing: border-box; }
         .skin-label-h { font-size: 10px; color: #BBB; text-align: center; font-weight: bold; }
@@ -64,14 +67,27 @@
         .checkbox-item { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: #555; background: #FFF9FA; padding: 10px 8px; border-radius: 10px; border: 1px solid #FFEDF1; white-space: nowrap; cursor: pointer; }
         .checkbox-item input { width: 18px; height: 18px; margin: 0; flex-shrink: 0; }
 
-        /* 樣式控制與 Emoji */
-        .style-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #f7f7f7; padding: 10px; border-radius: 12px; margin: 10px 0; border: 1px solid #eee; }
+        /* V1.56 整合面板與樣式控制 */
+        .integrated-panel { border: 2px solid #FFEDF1; background: #FFFBFC; }
+        .style-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #fff; padding: 12px; border-radius: 14px; margin-top: 10px; border: 1px solid #f1f1f1; }
         .control-item { display: flex; align-items: center; gap: 5px; }
-        .control-item label { margin: 0; font-size: 11px; white-space: nowrap; }
-        .emoji-bar { display: flex; flex-wrap: wrap; gap: 4px; background: #FFF9FA; padding: 8px; border-radius: 12px; border: 1px solid #FFEDF1; margin-bottom: 10px; max-height: 85px; overflow-y: auto; }
-        .emoji-btn { font-size: 20px; cursor: pointer; padding: 4px; border-radius: 6px; transition: 0.2s; user-select: none; }
-        .emoji-btn:hover { background: var(--secondary); transform: scale(1.15); }
-        .color-input { width: 40px; height: 30px; border: none; padding: 0; background: none; cursor: pointer; }
+        .control-item label { margin: 0; font-size: 11px; white-space: nowrap; color: #999; }
+        
+        /* 修改處：Emoji Bar 設為 6 個一列，自動顯示全部 */
+        .emoji-bar { 
+            display: grid; 
+            grid-template-columns: repeat(6, 1fr); 
+            gap: 5px; 
+            background: #fff; 
+            padding: 10px; 
+            border-radius: 14px; 
+            border: 1px solid #f1f1f1; 
+            margin-top: 10px; 
+        }
+        .emoji-btn { font-size: 24px; cursor: pointer; padding: 8px 4px; border-radius: 8px; transition: 0.2s; user-select: none; text-align: center; display: flex; align-items: center; justify-content: center; }
+        .emoji-btn:hover { background: var(--secondary); transform: scale(1.2); }
+        
+        .color-input { width: 40px; height: 32px; border: none; padding: 0; background: none; cursor: pointer; border-radius: 4px; }
 
         .btn-gen { background: linear-gradient(to right, #FF7E9F, #FF4D79); color: white; border: none; border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 20px 15px 10px; box-shadow: 0 8px 20px rgba(255, 77, 121, 0.4); }
         .btn-copy, .btn-save { border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 0 15px 10px; display: none; border: none; color: white; transition: 0.3s; }
@@ -91,10 +107,11 @@
 <body>
 
 <div class="phone-container">
-    <div class="header">🍓 老司機評測報告生成器 V1.55 🍓</div>
+    <div class="header">🍓 老司機評測報告生成器 V1.56 🍓</div>
 
     <div class="main-layout">
         <div class="column-left">
+            <!-- 店家資訊 -->
             <div class="section">
                 <div class="section-title"><span class="icon-lg">💒</span> 店家資訊與環境</div>
                 <label>選擇店家</label>
@@ -110,7 +127,7 @@
                 <textarea id="shop_url" rows="2" style="margin-top:10px;" placeholder="網址自動帶出..."></textarea>
                 <div class="flex-row">
                     <div><label>🏠 環境打分</label><input type="number" id="s_env" step="0.1" value="9.0"></div>
-                    <div><label>📝 環境備註</label><input type="text" id="env_note" value="ex:浴室太小, 燈太暗..etc"></div>
+                    <div><label>📝 環境備註</label><input type="text" id="env_note" value="ex:浴室太小"></div>
                 </div>
             </div>
 
@@ -174,28 +191,24 @@
                     </div>
                 </div>
                 <label>🗣️ 聊天/語文能力</label>
-                     <textarea id="chat_skill" rows="3" placeholder="例如：
-                    中文溝通無礙 / 慢熱
-                    英文溝通 / 小學中文程度
-                    中學英文程度"></textarea>
-                    
-                    <label>✨ 外貌特徵</label>
-                    <textarea id="feat_type" rows="4" placeholder="例如：
-                    小隻馬 / 漂亮耐看 / 氣質型
-                    豔麗型 / 清秀型 / 可愛型...etc"></textarea>
-               </div>
+                <textarea id="chat_skill" rows="3" placeholder="例如：中文溝通無礙 / 慢熱 / 英文溝通"></textarea>
+                <label>✨ 外貌特徵</label>
+                <textarea id="feat_type" rows="4" placeholder="例如：小隻馬 / 漂亮耐看 / 氣質型 / 豔麗型 / 清秀型 / 可愛型..etc"></textarea>
+            </div>
         </div>
 
         <div class="column-right">
+            <!-- 評分表 -->
             <div class="section">
                 <div class="section-title"><span class="icon-lg">🚦</span> 戰力評分表</div>
                 <div class="flex-row">
                     <div><label>✨ 顏值</label><input type="number" id="s_f" step="0.1" value="9.0"></div>
                     <div><label>🛠️ 按摩技巧</label>
                         <select id="is_massage">
-                        <option value="無" selected>無</option><option value="重壓">重壓</option><option value="太輕">太輕</option>
-                        <option value="輕巧帶過">輕巧帶過</option><option value="有等於沒有">有等於沒有</option><option value="亂按">亂按</option>
-                        </select></div>
+                            <option value="無" selected>無</option><option value="重壓">重壓</option><option value="適中">適中</option><option value="太輕">太輕</option>
+                            <option value="輕巧帶過">輕巧帶過</option><option value="有等於沒有">有等於沒有</option><option value="亂按">亂按</option>
+                        </select>
+                    </div>
                     <div><label>😊 態度</label><input type="number" id="s_a" step="0.1" value="9.0"></div>
                 </div>
                 <label>🧤 包覆感 (可複選)</label>
@@ -243,29 +256,33 @@
                 </div>
             </div>
 
+            <!-- 服務明細清單 -->
             <div class="section">
                 <div class="section-title"><span class="icon-lg">⚙️</span> 服務明細清單</div>
                 <div class="service-grid">
                     <div class="service-item"><div class="service-item-label">👩‍❤️‍👨 女友感</div><select id="v_gf"><option value="十足">十足</option><option value="足" selected>足</option><option value="普通">普通</option><option value="不足">不足</option><option value="無感">無感</option></select></div>
                     <div class="service-item"><div class="service-item-label">🚿 殘廢澡</div><select id="v_bt"><option value="有" selected>有</option><option value="無">無</option><option value="無（自行解決）">無（自行解決）</option></select></div>
                     <div class="service-item"><div class="service-item-label">💋 親親</div><select id="v_ks"><option value="小親">小親</option><option value="可舌吻" selected>可舌吻</option><option value="lg隨時有">lg隨時有</option><option value="無">無</option></select></div>
-                    <div class="service-item"><div class="service-item-label">🍭 舔棒蛋</div><select id="v_bj"><option value="都有" selected>都有</option><option value="舔棒">舔棒</option><option value="舔蛋">舔蛋</option><option value="無">無</option></select></div>
+                    <div class="service-item"><div class="service-item-label">🍭 舔棒蛋</div><select id="v_bj"><option value="都有" selected>都有</option><option value="舔棒">舔棒</option><option value="無">無</option></select></div>
                     <div class="service-item"><div class="service-item-label">🔞 挑逗前戲</div><select id="v_pre"><option value="有" selected>有</option><option value="無">無</option><option value="沒要求">沒要求</option></select></div>
                     <div class="service-item"><div class="service-item-label">👅 舔鮑</div><select id="v_ps"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
                     <div class="service-item"><div class="service-item-label">♋ 69</div><select id="v_69"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
-                    <div class="service-item"><div class="service-item-label">💦 口爆</div><select id="v_cum"><option value="有">有</option><option value="無" selected>無</option></select></div>
+                    <div class="service-item"><div class="service-item-label">💦 口爆</div><select id="v_cum"><option value="有">有</option><option value="無" selected>無</option><option value="沒試">沒試</option></select></div>
                     <div class="service-item"><div class="service-item-label">⏱️ 時間</div><select id="v_tm"><option value="充足" selected>充足</option><option value="剛好">剛好</option><option value="不足">不足</option><option value="偷時">偷時</option></select></div>
                     <div class="service-item"><div class="service-item-label">💆 按摩</div><select id="v_msg"><option value="有">有</option><option value="無" selected>無</option></select></div>
                 </div>
             </div>
 
-            <div class="section">
-                <div class="section-title"><span class="icon-lg">📝</span> 服務互動心得</div>
+            <!-- V1.56 整合式心得面板 (修改 Emoji 排列與內容) -->
+            <div class="section integrated-panel">
+                <div class="section-title"><span class="icon-lg">📝</span> 服務體驗心得與樣式</div>
                 
                 <label>📌 K/H/S 諮詢</label>
-                <input type="text" id="v_khs" value="請跟店家接洽" placeholder="可輸入數字或說明...">
+                <input type="text" id="v_khs" value="請跟店家接洽" placeholder="例如：請跟店家接洽">
 
-                <!-- 文字樣式控制區 -->
+                <label style="margin-top:12px;">分享過程細節...</label>
+                <textarea id="pros" rows="6" placeholder="在此輸入您的實戰體驗內容..."></textarea>
+
                 <div class="style-controls">
                     <div class="control-item">
                         <label>粗細</label>
@@ -276,7 +293,7 @@
                     </div>
                     <div class="control-item">
                         <label>大小</label>
-                        <input type="range" id="pros_size" min="14" max="32" value="16" style="width:70px;">
+                        <input type="range" id="pros_size" min="14" max="32" value="16" style="width:80px;">
                         <span id="size_label" style="font-size:11px;">16px</span>
                     </div>
                     <div class="control-item">
@@ -285,22 +302,20 @@
                     </div>
                 </div>
 
-                <!-- Emoji Bar -->
+                <!-- 24 個 Emoji，六個一列，全顯不捲動 -->
                 <div class="emoji-bar" id="emojiBar"></div>
-
-                <textarea id="pros" rows="6" placeholder="分享過程細節..."></textarea>
                 
                 <div class="flex-row" style="margin-top:15px;">
                     <div><label>🚀 回沖推薦</label>
                         <select id="re_visit">
-                            <option value="絕對">絕對</option><option value="推薦" selected>推薦</option><option value="普通">普通</option><option value="不推薦">不推薦</option><option value="不回沖">不回沖</option>
+                            <option value="絕對回沖">絕對回沖</option><option value="推薦" selected>推薦</option><option value="普通">普通</option><option value="不推薦">不推薦</option><option value="不回沖">不回沖</option>
                         </select>
                     </div>
                     <div><label>🏆 綜合等級</label>
                         <select id="final_tier">
                             <option value="SSS">SSS (神作)</option><option value="SS">SS (頂規)</option>
                             <option value="S" selected>S (優質)</option><option value="A">A (值得)</option>
-                            <option value="B">B (普通)</option><option value="C">C (避雷)</option>
+                            <option value="B">B (普通)</option><option value="C">C (雷區)</option>
                         </select>
                     </div>
                 </div>
@@ -329,19 +344,21 @@
         "後宮佳麗": "Line ID 86sex"
     };
 
+    // V1.56 修改後的 24 個 Emoji 清單
     const emojis = [
-        "👙", "👤", "🏠", "💒", "📍", "🎂", "🚬", "📸", "☀️", "✨", 
-        "🗣️", "⏳", "🍓", "🥛", "🍮", "🥯", "🌸", "🚦", "🛠️", "😊", 
-        "🧤", "⚙️", "👨‍❤️‍👨", "🚿", "💋", "🍭", "🔞", "👅", "♋", "💦"
+        "😭", "😂", "😡", "😢", "🤢", "😊", // 表情
+        "🛌", "🏩", "🔥", "🧨", "🔞", "💰", // 氛圍、18禁、金錢
+        "🍆", "🍑", "💦", "🔞", "🏩", "🛌", // 性愛示意與環境 (任意更換部分)
+        "🍭", "👙", "🍓", "🥛", "🍮", "🥯"  // 生活與示意
     ];
 
     const emojiBar = document.getElementById('emojiBar');
     emojis.forEach(e => {
-        const span = document.createElement('div');
-        span.className = 'emoji-btn';
-        span.innerText = e;
-        span.onclick = () => insertEmoji(e);
-        emojiBar.appendChild(span);
+        const div = document.createElement('div');
+        div.className = 'emoji-btn';
+        div.innerText = e;
+        div.onclick = () => insertEmoji(e);
+        emojiBar.appendChild(div);
     });
 
     function insertEmoji(emoji) {
@@ -367,10 +384,13 @@
 
     function toggleLocCustom() { document.getElementById('loc_custom').style.display = (document.getElementById('loc_sel').value === 'other') ? 'block' : 'none'; }
     function toggleNationCustom() { document.getElementById('nation_custom').style.display = (document.getElementById('nation_sel').value === 'other') ? "block" : "none"; }
+    
     function setSkin(el, code, desc, hex) { 
         document.querySelectorAll('.skin-btn').forEach(b => b.classList.remove('active')); 
         el.classList.add('active'); 
-        document.getElementById('skin_code').value = code; document.getElementById('skin_desc').value = desc; document.getElementById('skin_hex').value = hex;
+        document.getElementById('skin_code').value = code; 
+        document.getElementById('skin_desc').value = desc; 
+        document.getElementById('skin_hex').value = hex;
     }
 
     function showMsg(text) {
@@ -442,7 +462,7 @@
             document.getElementById('saveBtn').style.display = "block";
             if (window.navigator.vibrate) window.navigator.vibrate(50);
             res.scrollIntoView({ behavior: 'smooth' });
-        } catch (err) { showMsg("❌ 生成失敗，請檢查內容"); }
+        } catch (err) { showMsg("❌ 生成失敗，請檢查欄位內容"); }
     }
 
     function saveToFile() {
@@ -454,7 +474,7 @@
         link.href = URL.createObjectURL(blob);
         link.download = `${name}_評測報告.html`;
         link.click();
-        showMsg("💾 下載成功");
+        showMsg("💾 檔案下載成功");
     }
 
     function copyToClipboard() {
