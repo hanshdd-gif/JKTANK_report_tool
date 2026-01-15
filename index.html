@@ -110,7 +110,7 @@
                 <textarea id="shop_url" rows="2" style="margin-top:10px;" placeholder="網址自動帶出..."></textarea>
                 <div class="flex-row">
                     <div><label>🏠 環境打分</label><input type="number" id="s_env" step="0.1" value="9.0"></div>
-                    <div><label>📝 環境備註</label><input type="text" id="env_note" value="無"></div>
+                    <div><label>📝 環境備註</label><input type="text" id="env_note" value="ex:浴室太小, 燈太暗..etc"></div>
                 </div>
             </div>
 
@@ -154,6 +154,10 @@
                         <div class="skin-btn" style="background:#f5e7e4;" onclick="setSkin(this,'C1','粉白','#f5e7e4')">C1</div><div class="skin-btn" style="background:#f0d7ce;" onclick="setSkin(this,'C2','嫩粉','#f0d7ce')">C2</div><div class="skin-btn" style="background:#e4c2b1;" onclick="setSkin(this,'C3','自然','#e4c2b1')">C3</div><div class="skin-btn" style="background:#d4ae99;" onclick="setSkin(this,'C4','沙色','#d4ae99')">C4</div><div class="skin-btn" style="background:#b38b77;" onclick="setSkin(this,'C5','褐色','#b38b77')">C5</div>
                         <div class="skin-row-name">Asian</div>
                         <div class="skin-btn" style="background:#f9e4c5;" onclick="setSkin(this,'A1','白皙','#f9e4c5')">A1</div><div class="skin-btn active" style="background:#f4d0ac;" onclick="setSkin(this,'A2','偏白','#f4d0ac')">A2</div><div class="skin-btn" style="background:#e8b98d;" onclick="setSkin(this,'A3','自然','#e8b98d')">A3</div><div class="skin-btn" style="background:#d4a373;" onclick="setSkin(this,'A4','健康','#d4a373')">A4</div><div class="skin-btn" style="background:#bc8a5f;" onclick="setSkin(this,'A5','小麥','#bc8a5f')">A5</div>
+                        <div class="skin-row-name">Latino</div>
+                        <div class="skin-btn" style="background:#d2b48c;" onclick="setSkin(this,'L1','拿鐵','#d2b48c')">L1</div><div class="skin-btn" style="background:#c6a664;" onclick="setSkin(this,'L2','南洋','#c6a664')">L2</div><div class="skin-btn" style="background:#a67c52;" onclick="setSkin(this,'L3','古銅','#a67c52')">L3</div><div class="skin-btn" style="background:#8b5a2b;" onclick="setSkin(this,'L4','焦糖','#8b5a2b')">L4</div><div class="skin-btn" style="background:#5d4037;" onclick="setSkin(this,'L5','黝黑','#5d4037')">L5</div>
+                        <div class="skin-row-name">Black</div>
+                        <div class="skin-btn" style="background:#ead2c4;" onclick="setSkin(this,'B1','淺咖','#ead2c4')">B1</div><div class="skin-btn" style="background:#c59d83;" onclick="setSkin(this,'B2','中咖','#c59d83')">B2</div><div class="skin-btn" style="background:#9d725d;" onclick="setSkin(this,'B3','深咖','#9d725d')">B3</div><div class="skin-btn" style="background:#7f5a4a;" onclick="setSkin(this,'B4','黑咖','#7f5a4a')">B4</div><div class="skin-btn" style="background:#2b0f0e; color:white;" onclick="setSkin(this,'B5','極黑','#2b0f0e')">B5</div>
                     </div>
                 </div>
                 <input type="hidden" id="skin_code" value="A2"><input type="hidden" id="skin_desc" value="偏白"><input type="hidden" id="skin_hex" value="#f4d0ac">
@@ -161,8 +165,8 @@
                 <div class="flex-row">
                     <div><label>📸 真實度</label>
                         <select id="p_rate">
-                             <option value="99%">99%像</option><option value="90%" selected>90%像</option><option value="80%">80%像</option>
-                            <option value="70%">70%像</option><option value="完全不像">完全不像</option>
+                            <option value="99%">99%像</option><option value="90%" selected>90%像</option><option value="80%">80%像</option>
+                            <option value="70%">70%像</option><option value="60%">60%像</option><option value="50%">50%像</option><option value="完全不像">完全不像</option>
                         </select>
                     </div>
                     <div><label>🚬 抽煙</label>
@@ -170,10 +174,16 @@
                     </div>
                 </div>
                 <label>🗣️ 聊天/語文能力</label>
-                <textarea id="chat_skill" rows="3" placeholder="例如：中文溝通無礙 / 慢熱"></textarea>
-                <label>✨ 外貌特徵</label>
-                <textarea id="feat_type" rows="4" placeholder="例如：小隻馬 / 漂亮耐看 / 氣質型"></textarea>
-            </div>
+                     <textarea id="chat_skill" rows="3" placeholder="例如：
+                    中文溝通無礙 / 慢熱
+                    英文溝通 / 小學中文程度
+                    中學英文程度"></textarea>
+                    
+                    <label>✨ 外貌特徵</label>
+                    <textarea id="feat_type" rows="4" placeholder="例如：
+                    小隻馬 / 漂亮耐看 / 氣質型
+                    豔麗型 / 清秀型 / 可愛型...etc"></textarea>
+               </div>
         </div>
 
         <div class="column-right">
@@ -181,7 +191,11 @@
                 <div class="section-title"><span class="icon-lg">🚦</span> 戰力評分表</div>
                 <div class="flex-row">
                     <div><label>✨ 顏值</label><input type="number" id="s_f" step="0.1" value="9.0"></div>
-                    <div><label>🛠️ 按摩</label><input type="number" id="s_s" step="0.1" value="0"></div>
+                    <div><label>🛠️ 按摩技巧</label>
+                        <select id="is_massage">
+                        <option value="無" selected>無</option><option value="重壓">重壓</option><option value="太輕">太輕</option>
+                        <option value="輕巧帶過">輕巧帶過</option><option value="有等於沒有">有等於沒有</option><option value="亂按">亂按</option>
+                        </select></div>
                     <div><label>😊 態度</label><input type="number" id="s_a" step="0.1" value="9.0"></div>
                 </div>
                 <label>🧤 包覆感 (可複選)</label>
@@ -199,10 +213,10 @@
                         <select id="cup">
                             <option value="A">A</option><option value="B">B</option><option value="C" selected>C</option>
                             <option value="D">D</option><option value="E">E</option><option value="F">F</option>
-                            <option value="G">G</option><option value="H">H</option><option value=">H">>H</option>
+                            <option value="G">G</option><option value="H">H</option><option value="大於H">大於H</option>
                         </select>
                     </div>
-                    <div><label>🥛 真假奶</label><select id="is_real"><option value="真奶" selected>真奶</option><option value="假奶">假奶</option></select></div>
+                    <div><label>🥛 真假奶</label><select id="is_real"><option value="真奶" selected>真奶</option><option value="人工奶">人工奶</option></select></div>
                     <div><label>🍮 奶軟度</label>
                         <select id="is_soft">
                             <option value="軟" selected>軟</option>
@@ -308,6 +322,10 @@
 <script>
     const shopDataMap = { 
         "聯賣": "https://jkforum.net/p/thread-13469722-1-1.html", "茶香": "https://jkforum.net/p/thread-20199809-1-1.html",
+        "檸檬草": "https://jkforum.net/p/thread-20134169-1-1.html", "蘿莉小姐姐": "https://jkforum.net/p/thread-16691202-1-1.html",
+        "板橋妮妮娜娜": "https://jkforum.net/p/thread-11617295-1-1.html", "開心果": "https://jkforum.net/p/thread-20219254-1-1.html",
+        "Coca": "https://jkforum.net/p/thread-18237264-1-1.html", "花家": "https://jkforum.net/p/thread-15456349-1-1.html",
+        "維多利亞": "https://jkforum.net/p/thread-20145525-1-1.html", "松本一香": "https://jkforum.net/p/thread-19782916-1-1.html",
         "後宮佳麗": "Line ID 86sex"
     };
 
@@ -390,7 +408,7 @@
 ——————————————————————————————
 🚦 戰力評分表 (滿分10) 🚦
 • ✨ 顏值：${g('s_f')}
-• 🛠️ 按摩：${g('s_s')}
+• 🛠️ 按摩技巧：${g('is_massage')}
 • 😊 態度：${g('s_a')}
 • 🧤 包覆感：${feels}
 ——————————————————————————————
