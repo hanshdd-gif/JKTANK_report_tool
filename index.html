@@ -67,13 +67,10 @@
         .checkbox-item { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: #555; background: #FFF9FA; padding: 10px 8px; border-radius: 10px; border: 1px solid #FFEDF1; white-space: nowrap; cursor: pointer; }
         .checkbox-item input { width: 18px; height: 18px; margin: 0; flex-shrink: 0; }
 
-        /* V1.56 整合面板與樣式控制 */
+        /* V1.56 整合面板 */
         .integrated-panel { border: 2px solid #FFEDF1; background: #FFFBFC; }
-        .style-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #fff; padding: 12px; border-radius: 14px; margin-top: 10px; border: 1px solid #f1f1f1; }
-        .control-item { display: flex; align-items: center; gap: 5px; }
-        .control-item label { margin: 0; font-size: 11px; white-space: nowrap; color: #999; }
         
-        /* 修改處：Emoji Bar 設為 6 個一列，自動顯示全部 */
+        /* Emoji Bar 設為 6 個一列，自動顯示全部 */
         .emoji-bar { 
             display: grid; 
             grid-template-columns: repeat(6, 1fr); 
@@ -86,8 +83,6 @@
         }
         .emoji-btn { font-size: 24px; cursor: pointer; padding: 8px 4px; border-radius: 8px; transition: 0.2s; user-select: none; text-align: center; display: flex; align-items: center; justify-content: center; }
         .emoji-btn:hover { background: var(--secondary); transform: scale(1.2); }
-        
-        .color-input { width: 40px; height: 32px; border: none; padding: 0; background: none; cursor: pointer; border-radius: 4px; }
 
         .btn-gen { background: linear-gradient(to right, #FF7E9F, #FF4D79); color: white; border: none; border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 20px 15px 10px; box-shadow: 0 8px 20px rgba(255, 77, 121, 0.4); }
         .btn-copy, .btn-save { border-radius: 50px; padding: 18px; font-size: 18px; font-weight: bold; cursor: pointer; width: calc(100% - 30px); margin: 0 15px 10px; display: none; border: none; color: white; transition: 0.3s; }
@@ -267,40 +262,21 @@
                     <div class="service-item"><div class="service-item-label">🔞 挑逗前戲</div><select id="v_pre"><option value="有" selected>有</option><option value="無">無</option><option value="沒要求">沒要求</option></select></div>
                     <div class="service-item"><div class="service-item-label">👅 舔鮑</div><select id="v_ps"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
                     <div class="service-item"><div class="service-item-label">♋ 69</div><select id="v_69"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
-                    <div class="service-item"><div class="service-item-label">💦 口爆</div><select id="v_cum"><option value="有">有</option><option value="無" selected>無</option><option value="沒試">沒試</option></select></div>
+                    <div class="service-item"><div class="service-item-label">💦 口爆</div><select id="v_cum"><option value="有">有</option><option value="無" selected>無</option><option value="沒試" selected>沒試</option></select></div>
                     <div class="service-item"><div class="service-item-label">⏱️ 時間</div><select id="v_tm"><option value="充足" selected>充足</option><option value="剛好">剛好</option><option value="不足">不足</option><option value="偷時">偷時</option></select></div>
                     <div class="service-item"><div class="service-item-label">💆 按摩</div><select id="v_msg"><option value="有">有</option><option value="無" selected>無</option></select></div>
                 </div>
             </div>
 
-            <!-- V1.56 整合式心得面板 (修改 Emoji 排列與內容) -->
+            <!-- V1.56 整合式心得面板 (移除字型編輯) -->
             <div class="section integrated-panel">
-                <div class="section-title"><span class="icon-lg">📝</span> 服務體驗心得與樣式</div>
+                <div class="section-title"><span class="icon-lg">📝</span> 服務體驗心得</div>
                 
                 <label>📌 K/H/S 諮詢</label>
-                <input type="text" id="v_khs" value="請跟店家接洽" placeholder="例如：請跟店家接洽">
+                <input type="text" id="v_khs" value="ex:請跟店家接洽" placeholder="例如：請跟店家接洽">
 
-                <label style="margin-top:12px;">分享過程細節...</label>
+                <label style="margin-top:12px;">🎖️分享過程細節...</label>
                 <textarea id="pros" rows="6" placeholder="在此輸入您的實戰體驗內容..."></textarea>
-
-                <div class="style-controls">
-                    <div class="control-item">
-                        <label>粗細</label>
-                        <select id="pros_weight" style="padding:2px 5px; font-size:12px; width:auto;">
-                            <option value="normal">正常</option>
-                            <option value="bold">粗體</option>
-                        </select>
-                    </div>
-                    <div class="control-item">
-                        <label>大小</label>
-                        <input type="range" id="pros_size" min="14" max="32" value="16" style="width:80px;">
-                        <span id="size_label" style="font-size:11px;">16px</span>
-                    </div>
-                    <div class="control-item">
-                        <label>顏色</label>
-                        <input type="color" id="pros_color" class="color-input" value="#5D4037">
-                    </div>
-                </div>
 
                 <!-- 24 個 Emoji，六個一列，全顯不捲動 -->
                 <div class="emoji-bar" id="emojiBar"></div>
@@ -344,11 +320,11 @@
         "後宮佳麗": "Line ID 86sex"
     };
 
-    // V1.56 修改後的 24 個 Emoji 清單
+    // V1.56 24 個 Emoji 清單
     const emojis = [
         "😭", "😂", "😡", "😢", "🤢", "😊", // 表情
         "🛌", "🏩", "🔥", "🧨", "🔞", "💰", // 氛圍、18禁、金錢
-        "🍆", "🍑", "💦", "🔞", "🏩", "🛌", // 性愛示意與環境 (任意更換部分)
+        "🍆", "🍑", "💦", "🔞", "🏩", "🛌", // 性愛示意與環境
         "🍭", "👙", "🍓", "🥛", "🍮", "🥯"  // 生活與示意
     ];
 
@@ -369,10 +345,6 @@
         textarea.focus();
         textarea.setSelectionRange(start + emoji.length, start + emoji.length);
     }
-
-    document.getElementById('pros_size').addEventListener('input', (e) => {
-        document.getElementById('size_label').innerText = e.target.value + "px";
-    });
 
     function updateShopUrl() {
         const sel = document.getElementById('shop_sel').value;
@@ -420,7 +392,7 @@
 📸 真實度：${g('p_rate')}
 ☀️ 膚色：色號 ${g('skin_hex')} (${g('skin_code')} ${g('skin_desc')})
 ✨ 特徵：${g('feat_type')}
-🗣️ 聊天：${g('chat_skill')}
+🗣️ 聊天/中文能力：${g('chat_skill')}
 ——————————————————————————————
 ⏳ 身材：${g('body')} | ${g('cup')}杯 | ${g('is_real')}
 🍮 軟度：${g('is_soft')} | 小腹：${g('belly')} | 毛量：${g('hair')}
@@ -451,9 +423,6 @@
 
             const prosSpan = document.createElement('span');
             prosSpan.innerText = `📌 K/H/S：${g('v_khs')}\n\n${g('pros')}`;
-            prosSpan.style.fontWeight = g('pros_weight');
-            prosSpan.style.fontSize = g('pros_size') + "px";
-            prosSpan.style.color = g('pros_color');
             res.appendChild(prosSpan);
 
             res.appendChild(document.createTextNode(endTxt));
