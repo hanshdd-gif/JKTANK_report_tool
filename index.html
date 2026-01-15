@@ -156,18 +156,15 @@
                 <div class="skin-scroll-area">
                     <div class="skin-matrix">
                         <div></div><div class="skin-label-h">Light</div><div class="skin-label-h">Med-L</div><div class="skin-label-h">Med</div><div class="skin-label-h">Med-D</div><div class="skin-label-h">Dark</div>
-                        <div class="skin-row-name">Asian</div>
-                        <div class="skin-btn" style="background:#f9e4c5;" onclick="setSkin(this,'A1','白皙','#f9e4c5')">A1</div>
-                        <div class="skin-btn active" style="background:#f4d0ac;" onclick="setSkin(this,'A2','偏白','#f4d0ac')">A2</div>
-                        <div class="skin-btn" style="background:#e8b98d;" onclick="setSkin(this,'A3','自然','#e8b98d')">A3</div>
-                        <div class="skin-btn" style="background:#d4a373;" onclick="setSkin(this,'A4','健康','#d4a373')">A4</div>
-                        <div class="skin-btn" style="background:#bc8a5f;" onclick="setSkin(this,'A5','小麥','#bc8a5f')">A5</div>
                         <div class="skin-row-name">Caucasian</div>
-                        <div class="skin-btn" style="background:#f5e7e4;" onclick="setSkin(this,'C1','粉白','#f5e7e4')">C1</div>
-                        <div class="skin-btn" style="background:#f0d7ce;" onclick="setSkin(this,'C2','嫩粉','#f0d7ce')">C2</div>
-                        <div class="skin-btn" style="background:#e4c2b1;" onclick="setSkin(this,'C3','自然','#e4c2b1')">C3</div>
+                        <div class="skin-btn" style="background:#f5e7e4;" onclick="setSkin(this,'C1','粉白','#f5e7e4')">C1</div><div class="skin-btn" style="background:#f0d7ce;" onclick="setSkin(this,'C2','嫩粉','#f0d7ce')">C2</div><div class="skin-btn" style="background:#e4c2b1;" onclick="setSkin(this,'C3','自然','#e4c2b1')">C3</div><div class="skin-btn" style="background:#d4ae99;" onclick="setSkin(this,'C4','沙色','#d4ae99')">C4</div><div class="skin-btn" style="background:#b38b77;" onclick="setSkin(this,'C5','褐色','#b38b77')">C5</div>
+                        <div class="skin-row-name">Asian</div>
+                        <div class="skin-btn" style="background:#f9e4c5;" onclick="setSkin(this,'A1','白皙','#f9e4c5')">A1</div><div class="skin-btn active" style="background:#f4d0ac;" onclick="setSkin(this,'A2','偏白','#f4d0ac')">A2</div><div class="skin-btn" style="background:#e8b98d;" onclick="setSkin(this,'A3','自然','#e8b98d')">A3</div><div class="skin-btn" style="background:#d4a373;" onclick="setSkin(this,'A4','健康','#d4a373')">A4</div><div class="skin-btn" style="background:#bc8a5f;" onclick="setSkin(this,'A5','小麥','#bc8a5f')">A5</div>
+                        <div class="skin-row-name">Latino</div>
+                        <div class="skin-btn" style="background:#d2b48c;" onclick="setSkin(this,'L1','拿鐵','#d2b48c')">L1</div><div class="skin-btn" style="background:#c6a664;" onclick="setSkin(this,'L2','南洋','#c6a664')">L2</div><div class="skin-btn" style="background:#a67c52;" onclick="setSkin(this,'L3','古銅','#a67c52')">L3</div><div class="skin-btn" style="background:#8b5a2b;" onclick="setSkin(this,'L4','焦糖','#8b5a2b')">L4</div><div class="skin-btn" style="background:#5d4037;" onclick="setSkin(this,'L5','黝黑','#5d4037')">L5</div>
+                        <div class="skin-row-name">Black</div>
+                        <div class="skin-btn" style="background:#ead2c4;" onclick="setSkin(this,'B1','淺咖','#ead2c4')">B1</div><div class="skin-btn" style="background:#c59d83;" onclick="setSkin(this,'B2','中咖','#c59d83')">B2</div><div class="skin-btn" style="background:#9d725d;" onclick="setSkin(this,'B3','深咖','#9d725d')">B3</div><div class="skin-btn" style="background:#7f5a4a;" onclick="setSkin(this,'B4','黑咖','#7f5a4a')">B4</div><div class="skin-btn" style="background:#2b0f0e; color:white;" onclick="setSkin(this,'B5','極黑','#2b0f0e')">B5</div>
                     </div>
-                </div>
                 <input type="hidden" id="skin_code" value="A2"><input type="hidden" id="skin_desc" value="偏白"><input type="hidden" id="skin_hex" value="#f4d0ac">
 
                 <div class="flex-row">
@@ -182,9 +179,15 @@
                     </div>
                 </div>
                 <label>🗣️ 聊天/語文能力</label>
-                <textarea id="chat_skill" rows="2" placeholder="中文溝通無礙 / 慢熱..."></textarea>
-                <label>✨ 外貌特徵</label>
-                <textarea id="feat_type" rows="2" placeholder="小隻馬 / 漂亮耐看 / 氣質型..."></textarea>
+                 <textarea id="chat_skill" rows="3" placeholder="例如：
+                    中文溝通無礙 / 慢熱
+                    英文溝通 / 小學中文程度
+                    中學英文程度"></textarea>
+                    
+                    <label>✨ 外貌特徵</label>
+                    <textarea id="feat_type" rows="4" placeholder="例如：
+                    小隻馬 / 漂亮耐看 / 氣質型
+                    豔麗型 / 清秀型 / 可愛型...etc"></textarea>
             </div>
         </div>
 
@@ -202,19 +205,37 @@
                 <div class="checkbox-group" id="feelings">
                     <label class="checkbox-item"><input type="checkbox" value="緊密感"> 緊密感</label>
                     <label class="checkbox-item"><input type="checkbox" value="濕熱感"> 濕熱感</label>
+                    <label class="checkbox-item"><input type="checkbox" value="貼合融合"> 貼合融合</label>
                     <label class="checkbox-item"><input type="checkbox" value="環繞包覆"> 環繞包覆</label>
+                    <label class="checkbox-item"><input type="checkbox" value="深層/深入"> 深層/深入</label>
                     <label class="checkbox-item"><input type="checkbox" value="收縮有彈力"> 收縮有彈力</label>
                     <label class="checkbox-item"><input type="checkbox" value="幸福滿足"> 幸福滿足</label>
                 </div>
                 <div class="flex-row" style="margin-top:10px;">
-                    <div><label>🍓 罩杯</label><select id="cup"><option value="B">B</option><option value="C" selected>C</option><option value="D">D</option><option value="E">E</option></select></div>
-                    <div><label>🥛 真假</label><select id="is_real"><option value="真奶" selected>真奶</option><option value="假奶">假奶</option></select></div>
-                    <div><label>🍮 軟度</label><select id="is_soft"><option value="軟" selected>軟</option><option value="扎實">扎實</option></select></div>
-                </div>
+                <div><label>🍓 罩杯</label>
+                <select id="cup">
+                    <option value="A">A</option><option value="B">B</option><option value="C" selected>C</option>
+                    <option value="D">D</option><option value="E">E</option><option value="F">F</option>
+                    <option value="G">G</option><option value="H">H</option><option value=">H">>H</option>
+                </select>
+            </div>
+            <div><label>🥛 真假奶</label><select id="is_real"><option value="真奶" selected>真奶</option><option value="假奶">假奶</option></select></div>
+            <div><label>🍮 奶軟度</label><select id="is_soft"><option value="軟" selected>軟</option><option value="不軟">不軟</option></select></div>
+        </div>
                 <div class="flex-row">
-                    <div><label>⏳ 身材</label><select id="body"><option value="勻稱" selected>勻稱</option><option value="纖瘦">纖瘦</option><option value="微肉">微肉</option></select></div>
-                    <div><label>🥯 小腹</label><select id="belly"><option value="很平坦" selected>很平坦</option><option value="微凸">微凸</option></select></div>
-                    <div><label>🌸 毛量</label><select id="hair"><option value="無毛" selected>無毛</option><option value="少毛">少毛</option><option value="正常">正常</option></select></div>
+<div><label>⏳ 身材</label>
+                <select id="body">
+                    <option value="纖瘦S腰身">纖瘦S腰身</option><option value="勻稱" selected>勻稱</option><option value="微肉">微肉</option><option value="胖">胖</option>
+                </select>
+            </div>
+            <div><label>🥯 小腹</label>
+                <select id="belly">
+                    <option value="很平坦" selected>很平坦</option><option value="微凸不礙事">微凸不礙事</option>
+                    <option value="有點凸">有點凸</option><option value="有疤">有疤</option><option value="妊娠紋">妊娠紋</option>
+                </select>
+            </div>
+            <div><label>🌸 毛量</label>
+                <select id="hair"><option value="無毛" selected>無毛</option><option value="少毛">少毛</option><option value="正常">正常</option></select></div>
                 </div>
             </div>
 
@@ -222,12 +243,16 @@
             <div class="section">
                 <div class="section-title"><span class="icon-lg">⚙️</span> 服務明細清單</div>
                 <div class="service-grid">
-                    <div class="service-item"><div class="service-item-label">👩‍❤️‍👨 女友感</div><select id="v_gf"><option value="十足">十足</option><option value="足" selected>足</option><option value="普通">普通</option></select></div>
-                    <div class="service-item"><div class="service-item-label">🚿 殘廢澡</div><select id="v_bt"><option value="有" selected>有</option><option value="無">無</option></select></div>
-                    <div class="service-item"><div class="service-item-label">💋 親親</div><select id="v_ks"><option value="可舌吻" selected>可舌吻</option><option value="小親">小親</option><option value="無">無</option></select></div>
-                    <div class="service-item"><div class="service-item-label">🍭 舔棒蛋</div><select id="v_bj"><option value="都有" selected>都有</option><option value="舔棒">舔棒</option><option value="無">無</option></select></div>
-                    <div class="service-item"><div class="service-item-label">♋ 69</div><select id="v_69"><option value="有">有</option><option value="無" selected>無</option></select></div>
-                    <div class="service-item"><div class="service-item-label">💦 口爆</div><select id="v_cum"><option value="有">有</option><option value="無" selected>無</option></select></div>
+                <div class="service-item"><div class="service-item-label">👩‍❤️‍👨 女友感</div><select id="v_gf"><option value="十足">十足</option><option value="足" selected>足</option><option value="普通">普通</option><option value="不足">不足</option><option value="無感">無感</option></select></div>
+                <div class="service-item"><div class="service-item-label">🚿 殘廢澡</div><select id="v_bt"><option value="有" selected>有</option><option value="無">無</option><option value="無（自行解決）">無（自行解決）</option></select></div>
+                <div class="service-item"><div class="service-item-label">💋 親親</div><select id="v_ks"><option value="小親">小親</option><option value="可舌吻" selected>可舌吻</option><option value="lg隨時有">lg隨時有</option><option value="無">無</option></select></div>
+                <div class="service-item"><div class="service-item-label">🍭 舔棒蛋</div><select id="v_bj"><option value="舔棒">舔棒</option><option value="舔蛋">舔蛋</option><option value="都有" selected>都有</option><option value="無">無</option></select></div>
+                <div class="service-item"><div class="service-item-label">🔞 挑逗前戲</div><select id="v_pre"><option value="有" selected>有</option><option value="無">無</option><option value="沒要求">沒要求</option></select></div>
+                <div class="service-item"><div class="service-item-label">👅 舔鮑</div><select id="v_ps"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
+                <div class="service-item"><div class="service-item-label">♋ 69</div><select id="v_69"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
+                <div class="service-item"><div class="service-item-label">💦 口爆</div><select id="v_cum"><option value="有">有</option><option value="無">無</option><option value="沒試" selected>沒試</option></select></div>
+                <div class="service-item"><div class="service-item-label">⏱️ 時間</div><select id="v_tm"><option value="充足" selected>充足</option><option value="剛好">剛好</option><option value="不足">不足</option><option value="偷時">偷時</option></select></div>
+                <div class="service-item"><div class="service-item-label">💆 按摩</div><select id="v_msg"><option value="有">有</option><option value="無" selected>無</option></select></div>
                 </div>
             </div>
 
@@ -237,7 +262,7 @@
                 <textarea id="pros" rows="4" placeholder="分享過程細節..."></textarea>
                 <label>🚀 回沖推薦</label>
                 <select id="re_visit">
-                    <option value="絕對">絕對</option><option value="推薦" selected>推薦</option><option value="普通">普通</option><option value="不推薦">不推薦</option>
+                    <option value="絕對">絕對</option><option value="推薦" selected>推薦</option><option value="普通">普通</option><option value="不推薦">不推薦</option><option value="不回沖">不回沖</option>
                 </select>
             </div>
         </div>
@@ -256,17 +281,21 @@
 <script>
     // 店家數據庫
     const shopDataMap = { 
-        "聯賣": "https://jkforum.net/p/thread-13469722-1-1.html", 
-        "茶香": "https://jkforum.net/p/thread-20199809-1-1.html",
-        "蘿莉小姐姐": "https://jkforum.net/p/thread-16691202-1-1.html",
+        "聯賣": "https://jkforum.net/p/thread-13469722-1-1.html", "茶香": "https://jkforum.net/p/thread-20199809-1-1.html",
+        "檸檬草": "https://jkforum.net/p/thread-20134169-1-1.html", "蘿莉小姐姐": "https://jkforum.net/p/thread-16691202-1-1.html",
+        "板橋妮妮娜娜": "https://jkforum.net/p/thread-11617295-1-1.html", "開心果": "https://jkforum.net/p/thread-20219254-1-1.html",
+        "Coca": "https://jkforum.net/p/thread-18237264-1-1.html", "花家": "https://jkforum.net/p/thread-15456349-1-1.html",
+        "維多利亞": "https://jkforum.net/p/thread-20145525-1-1.html", "松本一香": "https://jkforum.net/p/thread-19782916-1-1.html",
         "後宮佳麗": "Line ID 86sex"
     };
 
     // UI 交互邏輯
     function updateShopUrl() {
         const sel = document.getElementById('shop_sel').value;
-        document.getElementById('shop_url').value = shopDataMap[sel] || "";
-        document.getElementById('shop_custom').style.display = (sel === 'custom') ? 'block' : 'none';
+        const urlInput = document.getElementById('shop_url');
+        const customInput = document.getElementById('shop_custom');
+        if(urlInput) urlInput.value = shopDataMap[sel] || "";
+        if(customInput) customInput.style.display = (sel === 'custom') ? 'block' : 'none';
     }
 
     function toggleLocCustom() {
@@ -274,7 +303,8 @@
     }
 
     function toggleNationCustom() { 
-        document.getElementById('nation_custom').style.display = (document.getElementById('nation_sel').value === 'other') ? "block" : "none"; 
+        const nation = document.getElementById('nation_sel').value;
+        document.getElementById('nation_custom').style.display = (nation === 'other') ? "block" : "none"; 
     }
 
     function setSkin(el, code, desc, hex) { 
